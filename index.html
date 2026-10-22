@@ -790,7 +790,7 @@ function setDate(v){
 }
 
 /* ---------- roteiro ---------- */
-let cur = 1;
+let cur = 1, centerDay = null;
 function renderDayList(){
   const n = currentDay(); const doneCount = Array.from({length:31},(_,i)=>i+1).filter(isDone).length;
   let h = `<div class="pbox"><div class="ptxt">${doneCount} de 31 dias concluídos</div><div class="progress"><i style="width:${(doneCount/31*100).toFixed(1)}%"></i></div></div>`;
@@ -800,9 +800,17 @@ function renderDayList(){
       h += `<button data-day="${d}" class="${isDone(d)?'done':''} ${n===d?'today':''}" aria-current="${d===cur}"><span class="num">${d}</span><span class="t">${esc(BOOK[d][0])}</span><span class="dot" aria-hidden="true"></span></button>`;
     }
   });
-  $("#dayList").innerHTML = h;
-  const active = $("#dayList [aria-current='true']");
-  if (active && window.innerWidth <= 860) active.scrollIntoView({block:"nearest", inline:"center"});
+  const list = $("#dayList"), keepTop = list.scrollTop, keepLeft = list.scrollLeft;
+  list.innerHTML = h;
+  list.scrollTop = keepTop; list.scrollLeft = keepLeft;
+  if (centerDay !== cur){
+    centerDay = cur;
+    const active = list.querySelector("[aria-current='true']");
+    if (active){
+      if (window.innerWidth <= 860) list.scrollLeft = active.offsetLeft - list.clientWidth/2 + active.offsetWidth/2;
+      else if (active.offsetTop < list.scrollTop || active.offsetTop > list.scrollTop + list.clientHeight - 40) list.scrollTop = active.offsetTop - 80;
+    }
+  }
 }
 function prayerDetails(k, open){
   const p = PRAYERS[k];
