@@ -1,0 +1,1012 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Roteiro dos 33 dias de preparação para a Consagração a Jesus por Maria, segundo São Luís de Montfort.">
+<meta name="theme-color" content="#233e78">
+<style>[hidden]{display:none!important}body{margin:0}img{max-width:100%}</style>
+<title>Totus Tuus — Consagração</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500;1,600&family=Spectral:ital,wght@0,400;0,500;1,400&display=swap">
+<style>
+/* Layout: livro de horas — faixa de cabeçalho em azul-lápis, abas fixas, roteiro em duas colunas (lista de dias + leitura). */
+:root{
+  --bg:#f5f7fb; --surface:#ffffff; --ink:#1a2135; --muted:#59627c; --line:#dce1ec;
+  --lapis:#233e78; --lapis-ink:#ffffff; --lapis-soft:#e7ecf7; --gold:#9a7424; --gold-soft:#f3ead3;
+  --done:#2f6b4f; --link:#233e78;
+  --f-display:"Cormorant Garamond", "Garamond", "Times New Roman", serif;
+  --f-body:"Spectral", Georgia, "Times New Roman", serif;
+  --f-label:"Cinzel", "Trajan Pro", Georgia, serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0e1321; --surface:#161d2f; --ink:#e7eaf3; --muted:#a3acc4; --line:#2a3249;
+  --lapis:#1d3263; --lapis-ink:#f1f3fa; --lapis-soft:#1c2843; --gold:#d8b45e; --gold-soft:#2b2516; --done:#7cc3a0; --link:#e1c272; color-scheme: dark } }
+:root[data-theme="dark"]{
+  --bg:#0e1321; --surface:#161d2f; --ink:#e7eaf3; --muted:#a3acc4; --line:#2a3249;
+  --lapis:#1d3263; --lapis-ink:#f1f3fa; --lapis-soft:#1c2843; --gold:#d8b45e; --gold-soft:#2b2516; --done:#7cc3a0; --link:#e1c272; color-scheme: dark }
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.65;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--lapis)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);font-weight:700;line-height:1.15;text-wrap:balance;margin:0}
+.label{font-family:var(--f-label);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600}
+a{color:var(--link)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+/* Cabeçalho */
+.mast{background:var(--lapis);color:var(--lapis-ink)}
+.mast .wrap{padding-block:28px 22px;display:grid;gap:18px;grid-template-columns:1fr auto;align-items:end}
+.mast .label{color:#e4c77d}
+.mast h1{font-size:clamp(2.6rem,6vw,4rem);font-weight:600;font-style:italic;letter-spacing:.01em}
+.mast p{margin:.2rem 0 0;max-width:46ch;opacity:.9}
+.today{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);border-radius:6px;padding:12px 16px;min-width:0;max-width:340px}
+.today b{font-family:var(--f-display);font-size:1.5rem;display:block;line-height:1.1}
+.today small{opacity:.85}
+.today button{margin-top:8px;background:#e4c77d;color:#1a2135;border:0;border-radius:4px;padding:6px 12px;cursor:pointer;font-size:.9rem}
+@media (max-width:720px){.mast .wrap{grid-template-columns:1fr}.today{max-width:none}}
+
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+nav.tabs button{background:none;border:0;border-bottom:3px solid transparent;padding:14px 14px 11px;cursor:pointer;white-space:nowrap;font-family:var(--f-label);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--gold)}
+
+main{padding-block:32px 64px}
+section.view{display:grid;gap:36px}
+.lede{font-size:1.12rem;max-width:62ch}
+.lede-q{font-family:var(--f-display);font-style:italic;font-size:1.45rem;line-height:1.35;max-width:40ch;margin:0;border-left:3px solid var(--gold);padding-left:18px}
+.lede-q cite{display:block;font-family:var(--f-label);font-style:normal;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+
+/* Linha do tempo */
+.timeline{display:flex;gap:3px;border-radius:6px;overflow:hidden;min-width:0}
+.seg{padding:12px 12px 14px;overflow-wrap:anywhere;background:var(--lapis-soft);min-width:0;cursor:pointer;border:0;text-align:left}
+.seg:hover{filter:brightness(.97)}
+.seg .n{font-family:var(--f-label);font-size:.68rem;letter-spacing:.1em;color:var(--gold);display:block}
+.seg strong{font-family:var(--f-display);font-size:1.15rem;display:block;line-height:1.2}
+.seg span.d{font-size:.85rem;color:var(--muted)}
+.seg.last{background:var(--gold-soft)}
+@media (max-width:720px){.timeline{flex-direction:column}.seg{flex:none!important}}
+
+.phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.phase h3{font-size:1.35rem;margin:4px 0 6px}
+.phase p{margin:0 0 8px;color:var(--muted);font-size:.97rem}
+.phase ul{margin:0;padding-left:1.1rem;font-size:.95rem}
+
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:24px}
+.cal{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:28px}
+@media (max-width:820px){.cal{grid-template-columns:1fr}}
+.field{display:grid;gap:6px;margin-bottom:14px}
+.field label{font-family:var(--f-label);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+select,input[type=date],input[type=text]{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:5px;padding:9px 10px;width:100%;max-width:100%}
+.result{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin-top:6px;font-variant-numeric:tabular-nums}
+.result dt{color:var(--muted)} .result dd{margin:0;font-weight:500}
+.feasts{list-style:none;margin:0;padding:0;display:grid;gap:0;font-variant-numeric:tabular-nums}
+.feasts li{display:grid;grid-template-columns:7.5rem 1fr auto;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);align-items:baseline;font-size:.95rem}
+.feasts li .st{color:var(--muted);font-size:.85rem}
+.feasts li button{background:none;border:1px solid var(--line);border-radius:4px;padding:2px 9px;cursor:pointer;font-size:.82rem;color:var(--link)}
+.feasts li.next{background:var(--gold-soft)}
+@media (max-width:520px){.feasts li{grid-template-columns:1fr auto}.feasts li .dt{grid-column:1/-1;font-weight:500}}
+
+.note{background:var(--gold-soft);border-radius:6px;padding:14px 18px;font-size:.97rem}
+.note b{font-family:var(--f-label);font-size:.75rem;letter-spacing:.1em}
+
+.steps{counter-reset:s;list-style:none;padding:0;margin:0;display:grid;gap:14px}
+.steps li{counter-increment:s;display:grid;grid-template-columns:2.2rem 1fr;gap:12px;align-items:start}
+.steps li::before{content:counter(s);font-family:var(--f-display);font-weight:700;font-size:1.4rem;color:var(--gold);text-align:right;line-height:1.3}
+.steps li p{margin:0}
+
+/* Roteiro */
+.route{display:grid;grid-template-columns:260px minmax(0,1fr);gap:32px;align-items:start}
+.days{position:sticky;top:calc(env(safe-area-inset-top,0px) + 64px);max-height:calc(100vh - 90px);overflow:auto;padding-right:6px}
+.days h4{font-family:var(--f-label);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:18px 0 6px;font-weight:600}
+.days h4:first-child{margin-top:0}
+.days button{display:grid;grid-template-columns:2rem 1fr 10px;gap:6px;align-items:center;width:100%;text-align:left;background:none;border:0;border-radius:5px;padding:6px 8px;cursor:pointer;font-size:.9rem;line-height:1.3;color:var(--ink)}
+.days button .num{font-family:var(--f-display);font-weight:700;font-size:1.05rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.days button[aria-current="true"]{background:var(--lapis-soft)}
+.days button[aria-current="true"] .num{color:var(--gold)}
+.days button .dot{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--line)}
+.days button.done .dot{background:var(--done);border-color:var(--done)}
+.days button.today .num{text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:3px}
+.progress{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin:6px 0 2px}
+.progress i{display:block;height:100%;background:var(--done);width:0}
+.ptxt{font-size:.82rem;color:var(--muted);font-variant-numeric:tabular-nums}
+@media (max-width:860px){
+  .route{grid-template-columns:1fr;gap:20px}
+  .days{position:static;max-height:none;overflow-x:auto;overflow-y:hidden;display:flex;gap:6px;padding-bottom:6px}
+  .days h4,.days .pbox{display:none}
+  .days button{grid-template-columns:auto;flex:none;width:auto;padding:6px 10px;border:1px solid var(--line)}
+  .days button .t,.days button .dot{display:none}
+  .days button.done{border-color:var(--done)}
+}
+
+.day header{display:grid;gap:6px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.day h2{font-size:clamp(1.9rem,4vw,2.6rem)}
+.day .meta{color:var(--muted);font-size:.95rem}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.chip{font-family:var(--f-label);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;background:var(--lapis-soft);border-radius:999px;padding:4px 10px}
+.block{display:grid;gap:10px;padding-block:22px;border-bottom:1px solid var(--line)}
+.block > h3{font-size:1.45rem}
+.block .src{font-style:italic;color:var(--muted);margin:-4px 0 0}
+.reading p{margin:0 0 .9em;max-width:66ch}
+.reading h5{font-family:var(--f-label);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin:.6em 0 .3em;font-weight:600}
+.reading .verse{white-space:pre-line;font-style:italic;padding-left:18px;border-left:2px solid var(--line)}
+.invoc{font-family:var(--f-display);font-style:italic;font-size:1.3rem;color:var(--link)}
+
+details.pr{border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+details.pr + details.pr{margin-top:8px}
+details.pr summary{cursor:pointer;padding:11px 16px;font-family:var(--f-display);font-size:1.2rem;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+details.pr summary::-webkit-details-marker{display:none}
+details.pr summary::after{content:"+";font-family:var(--f-body);color:var(--gold);font-size:1.2rem}
+details.pr[open] summary::after{content:"–"}
+details.pr summary small{font-family:var(--f-body);font-weight:400;font-size:.85rem;color:var(--muted);margin-left:auto}
+.prbody{padding:0 18px 18px;max-width:68ch}
+.prbody p{margin:0 0 .8em}
+.prbody .st{white-space:pre-line;margin:0 0 1em}
+.prbody ul.lit{list-style:none;padding:0;margin:0 0 1em}
+.prbody ul.lit li{padding:2px 0}
+.prbody ul.lit li em{color:var(--muted)}
+.prbody .vr{font-style:italic}
+
+.book{display:grid;grid-template-columns:auto 1fr;gap:6px 18px}
+.book dt{font-family:var(--f-label);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:.3em}
+.book dd{margin:0}
+@media (max-width:520px){.book{grid-template-columns:1fr}.book dd{margin-bottom:8px}}
+.ask{font-family:var(--f-display);font-size:1.35rem;font-style:italic;line-height:1.35;margin:0}
+
+.checks{display:grid;gap:8px}
+.checks label{display:flex;gap:10px;align-items:center;cursor:pointer}
+.checks input{width:18px;height:18px;accent-color:var(--done)}
+.pager{display:flex;justify-content:space-between;gap:12px;padding-top:22px;flex-wrap:wrap}
+.pager button{background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:9px 14px;cursor:pointer;max-width:100%}
+.pager button:disabled{opacity:.4;cursor:default}
+.pager button.primary{background:var(--lapis);color:var(--lapis-ink);border-color:var(--lapis)}
+
+/* Orações */
+.prgrid{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;max-width:820px}
+.use{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+
+/* Consagração */
+.formula{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:clamp(20px,4vw,40px);max-width:760px}
+.formula h3{text-align:center;font-size:1.6rem;margin-bottom:4px}
+.formula .sub{text-align:center;font-family:var(--f-label);font-size:.72rem;letter-spacing:.12em;color:var(--gold);margin-bottom:20px}
+.formula p{text-align:justify;hyphens:auto;margin:0 0 1em}
+.formula .nm{font-weight:500;border-bottom:1px solid var(--ink);padding:0 4px}
+.sign{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:32px;font-size:.85rem;color:var(--muted)}
+.sign div{border-top:1px solid var(--ink);padding-top:6px}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.pfm{display:grid;gap:10px}
+.pfm div{display:grid;grid-template-columns:5.5rem 1fr;gap:12px;align-items:baseline}
+.pfm b{font-family:var(--f-display);font-size:1.3rem;color:var(--gold)}
+.pfm p{margin:0}
+footer{border-top:1px solid var(--line);padding-block:20px;color:var(--muted);font-size:.85rem}
+.journal textarea{width:100%;max-width:100%;min-height:10rem;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:12px 14px;line-height:1.6;resize:vertical}
+.journal label{font-family:var(--f-label);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.savest{font-size:.84rem;color:var(--muted);margin:0}
+.savest b{color:var(--done);font-weight:500}
+.jbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.btn{background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:8px 14px;cursor:pointer}
+.btn.primary{background:var(--lapis);color:var(--lapis-ink);border-color:var(--lapis)}
+.entries{max-width:760px}
+.entry{display:grid;gap:6px;padding-block:22px;border-bottom:1px solid var(--line)}
+.entry h3{font-size:1.45rem}
+.entry .q{font-style:italic;color:var(--muted);margin:0}
+.entry .txt{white-space:pre-wrap;margin:4px 0 0}
+.entry button{justify-self:start;background:none;border:0;padding:0;color:var(--link);cursor:pointer;text-decoration:underline;text-underline-offset:3px;font-size:.9rem}
+.empty{background:var(--surface);border:1px dashed var(--line);border-radius:8px;padding:24px;max-width:760px}
+.toast{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:5px;font-size:.9rem}
+@media (prefers-reduced-motion:no-preference){ .view{animation:fade .25s ease} @keyframes fade{from{opacity:.4}to{opacity:1}} }
+</style>
+
+</head>
+<body>
+<header class="mast">
+  <div class="wrap">
+    <div>
+      <div class="label">Método de São Luís Maria Grignion de Montfort</div>
+      <h1>Totus Tuus</h1>
+      <p>Consagração a Jesus Cristo, a Sabedoria Encarnada, pelas mãos de Maria. Roteiro dos 33 dias de preparação, com as meditações, orações e a fórmula da consagração.</p>
+    </div>
+    <div class="today" id="todayBox" aria-live="polite"></div>
+  </div>
+</header>
+
+<nav class="tabs" aria-label="Seções">
+  <div class="wrap" role="tablist">
+    <button role="tab" data-v="inicio" id="t-inicio">Início</button>
+    <button role="tab" data-v="roteiro" id="t-roteiro">Roteiro diário</button>
+    <button role="tab" data-v="oracoes" id="t-oracoes">Orações</button>
+    <button role="tab" data-v="consagracao" id="t-consagracao">Dia da consagração</button>
+    <button role="tab" data-v="diario" id="t-diario">Meu diário</button>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- INÍCIO -->
+<section class="view" id="v-inicio">
+  <blockquote class="lede-q">“Meu querido irmão, convence-te de que, se fores fiel às práticas interiores e exteriores desta Devoção, participarás dos frutos maravilhosos que ela produz na alma fiel.”<cite>São Luís Maria Grignion de Montfort</cite></blockquote>
+
+  <div style="display:grid;gap:14px">
+    <h2 style="font-size:1.9rem">Como é a preparação</h2>
+    <p class="lede" style="margin:0">São Luís pede pelo menos doze dias para se esvaziar do espírito do mundo e, depois, três semanas para se encher de Jesus Cristo por meio da Santíssima Virgem. Cada “semana”, para São Luís, tem seis dias. No fim, faz-se a confissão, a comunhão e a consagração.</p>
+    <div class="timeline" id="timeline"></div>
+  </div>
+
+  <div class="phases" id="phases"></div>
+
+  <div class="panel">
+    <div class="cal">
+      <div>
+        <div class="label">Seu calendário</div>
+        <h2 style="font-size:1.7rem;margin:4px 0 12px">Escolha a data da consagração</h2>
+        <p style="margin:0 0 14px;color:var(--muted)">Tradicionalmente se escolhe uma festa de Nossa Senhora. Os 30 dias começam 30 dias antes; a consagração é o 31º dia.</p>
+        <div class="field">
+          <label for="feastSel">Festa mariana</label>
+          <select id="feastSel"></select>
+        </div>
+        <div class="field">
+          <label for="consDate">Ou outra data</label>
+          <input type="date" id="consDate">
+        </div>
+        <dl class="result" id="calResult"></dl>
+      </div>
+      <div style="min-width:0">
+        <div class="label">Próximas datas</div>
+        <ul class="feasts" id="feastList" style="margin-top:8px"></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="two">
+    <div>
+      <h2 style="font-size:1.6rem;margin-bottom:12px">Cada dia, em quatro passos</h2>
+      <ol class="steps">
+        <li><p><b>Orações do período.</b> Começa-se sempre pelas orações indicadas para a etapa (estão no próprio dia, no roteiro).</p></li>
+        <li><p><b>Meditação da apostila.</b> Texto de um santo para o dia: Montfort, Santo Afonso, o Cura d’Ars, a Imitação de Cristo.</p></li>
+        <li><p><b>Meditação do livro.</b> Leitura do Evangelho sugerida e a meditação do livro <i>Exercícios Espirituais para a Total Consagração</i>.</p></li>
+        <li><p><b>Exame e partilha.</b> Uma pergunta para rezar sozinho ou conversar no grupo. Marque o dia como feito.</p></li>
+      </ol>
+    </div>
+    <div style="display:grid;gap:14px;align-content:start">
+      <div class="note"><b>IMPORTANTE.</b> Ao final da preparação é necessário fazer a confissão e a comunhão. O livro recomenda uma confissão geral. Quem não tiver acesso ao sacramento faça um ato de contrição e a comunhão espiritual (veja na aba “Dia da consagração”).</div>
+      <div class="note" style="background:var(--lapis-soft)"><b>DEPOIS DA CONSAGRAÇÃO.</b> São Luís pede que se renove a consagração pelo menos uma vez por ano, na mesma data, repetindo as três semanas. E pode-se renová-la todos os dias: “Eu sou todo Vosso e tudo o que tenho Vos pertence, ó meu amável Jesus, por Maria, Vossa Santa Mãe!”</div>
+    </div>
+  </div>
+</section>
+
+<!-- ROTEIRO -->
+<section class="view" id="v-roteiro" hidden>
+  <div class="route">
+    <aside class="days" id="dayList" aria-label="Dias"></aside>
+    <article class="day" id="dayView"></article>
+  </div>
+</section>
+
+<!-- ORAÇÕES -->
+<section class="view" id="v-oracoes" hidden>
+  <div>
+    <div class="label">Orações da preparação</div>
+    <h2 style="font-size:2rem;margin:4px 0 8px">Orações</h2>
+    <p class="lede" style="margin:0">As orações que São Luís indica para cada etapa, conforme a apostila. Toque no nome para abrir.</p>
+  </div>
+  <div class="prgrid" id="prayerList"></div>
+</section>
+
+<!-- CONSAGRAÇÃO -->
+<section class="view" id="v-consagracao" hidden>
+  <div>
+    <div class="label">31º dia</div>
+    <h2 style="font-size:2rem;margin:4px 0 8px">O dia da consagração</h2>
+    <p class="lede" style="margin:0">“No fim dessas três semanas confessar-se-ão e comungarão com a intenção de se darem a Jesus Cristo na qualidade de escravos de amor, pelas mãos de Maria. E depois da comunhão dirão a fórmula da consagração. Deverão escrevê-la ou mandá-la escrever, se não estiver impressa, e assiná-la no mesmo dia em que a fizerem.”</p>
+  </div>
+
+  <div class="two">
+    <div>
+      <h3 style="font-size:1.5rem;margin-bottom:12px">Roteiro do dia</h3>
+      <ol class="steps">
+        <li><p><b>Confissão.</b> Confessar-se ao fim das três semanas (o livro recomenda uma confissão geral).</p></li>
+        <li><p><b>Santa Missa e comunhão</b>, com a intenção de se dar a Jesus pelas mãos de Maria, seguindo o modo de comungar ensinado por São Luís (abaixo).</p></li>
+        <li><p><b>Fórmula da consagração</b>, rezada depois da comunhão, como ação de graças.</p></li>
+        <li><p><b>Assinar</b> a fórmula no mesmo dia. Se o sacerdote conhecer e apoiar, pode assiná-la como diretor espiritual e abençoar as correntinhas, se forem usadas.</p></li>
+        <li><p><b>Um tributo</b> a Jesus e a Maria: um jejum, uma mortificação, uma esmola, uma vela. “Jesus só olha a boa vontade.”</p></li>
+      </ol>
+    </div>
+    <div>
+      <h3 style="font-size:1.5rem;margin-bottom:12px">Modo de comungar com Maria</h3>
+      <ol class="steps">
+        <li><p>Humilhar-se profundamente diante de Deus.</p></li>
+        <li><p>Renunciar ao próprio fundo e às próprias disposições, embora o amor-próprio as faça parecer boas.</p></li>
+        <li><p>Renovar a consagração: “Todo Vosso sou, ó querida Mãe, e tudo o que tenho é Vosso!”</p></li>
+        <li><p>Pedir a Maria que empreste o Seu Coração para nele receber o Seu Filho: “Tomo-Vos como toda a minha riqueza. Dai-me o Vosso Coração, ó Maria!”</p></li>
+        <li><p>Depois da comunhão, recolhido, introduzir Jesus no Coração de Maria, deixando-A adorá-Lo e amá-Lo por nós.</p></li>
+      </ol>
+    </div>
+  </div>
+
+  <details class="pr" style="max-width:820px">
+    <summary>Comunhão espiritual <small>para quem não puder comungar</small></summary>
+    <div class="prbody">
+      <p><i>“A comunhão espiritual consiste no desejo de receber a Jesus Sacramentado e em dar-Lhe um amoroso abraço, como se já O tivéssemos recebido.”</i> (Santo Afonso Maria de Ligório)</p>
+      <p>No momento em que o sacerdote comunga, recolha-se, faça um ato de sincera contrição e todos os atos de amor, oferecimento e humildade que faria ao comungar; deseje vivamente receber Jesus. Professe sua fé na presença real:</p>
+      <p class="vr">Meu Deus, creio firmemente em Vossa presença na Eucaristia. Gostaria de receber-Vos agora realmente, mas como não posso, vinde, ao menos espiritualmente, ao meu coração. Inflamai-me de Vosso ardor e fazei com que eu lute seriamente pela expansão de Vosso Reino. Amém.</p>
+    </div>
+  </details>
+
+  <div style="display:grid;gap:14px">
+    <h3 style="font-size:1.5rem">A fórmula</h3>
+    <div class="field" style="max-width:420px;margin:0">
+      <label for="consName">Seu nome, para preencher a fórmula</label>
+      <input type="text" id="consName" placeholder="Escreva seu nome" autocomplete="name">
+    </div>
+    <div class="formula" id="formula"></div>
+  </div>
+
+  <div class="two">
+    <div>
+      <h3 style="font-size:1.5rem;margin-bottom:12px">Como viver depois: prática interior</h3>
+      <div class="pfm">
+        <div><b>Por Maria</b><p>Em tudo obedecer à Santíssima Virgem e conduzir-se pelo Seu espírito, que é o Espírito de Deus.</p></div>
+        <div><b>Com Maria</b><p>Em cada ação, olhar como Maria a faria em nosso lugar e imitá-La.</p></div>
+        <div><b>Em Maria</b><p>Permanecer recolhido no interior de Maria, vendo as coisas com os olhos d’Ela.</p></div>
+        <div><b>Para Maria</b><p>Fazer tudo em Sua honra, para que, por Ela, tudo seja para Jesus.</p></div>
+      </div>
+    </div>
+    <div>
+      <h3 style="font-size:1.5rem;margin-bottom:12px">Práticas exteriores</h3>
+      <p style="margin:0 0 10px">Não são essenciais, mas são utilíssimas para exteriorizar o amor a Jesus e a Maria e edificar o próximo:</p>
+      <ul style="margin:0;padding-left:1.2rem">
+        <li>rezar o Santo Rosário e honrar os Seus mistérios;</li>
+        <li>participar de Suas festas, especialmente a Anunciação (25 de março);</li>
+        <li>usar a pequena corrente como sinal da santa escravidão;</li>
+        <li>renovar a consagração todo ano e levar outros a fazê-la.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<!-- DIÁRIO -->
+<section class="view" id="v-diario" hidden>
+  <div style="display:grid;gap:8px">
+    <div class="label">Suas percepções</div>
+    <h2 style="font-size:2rem">Meu diário da consagração</h2>
+    <p class="lede" style="margin:0">Tudo o que você escreveu em cada dia da preparação, em ordem. Releia antes do dia da consagração e a cada renovação anual.</p>
+    <p class="savest storeInfo"></p>
+  </div>
+  <div class="jbar">
+    <button class="btn" id="copyAll">Copiar tudo</button>
+    <button class="btn" id="dlAll" hidden>Baixar como arquivo de texto</button>
+  </div>
+  <div class="entries" id="journal"></div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">Conteúdo da apostila <i>Roteiro para Consagração à Virgem Maria</i> (2022) e estrutura do livro <i>Exercícios Espirituais para a Total Consagração à Santíssima Virgem</i> (Opus Cordis Mariae). As meditações do livro devem ser lidas no próprio livro. Cada pessoa vê apenas o próprio diário e o próprio progresso.</div>
+</footer>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const MED = {"1":{"s":"Dos escritos de São João Batista Maria Vianney","b":[{"t":"p","x":"“Meu filho, quão trágico é a vida daqueles que querem seguir os caminhos do mundo sem, no entanto deixarem de ser filhos de Deus! São João nos adverte em sua primeira epístola: \"Não ameis o mundo nem as coisas do mundo. Se alguém ama o mundo não está nele o amor do Pai.”"},{"t":"p","x":"Ah! Meus caros filhos, se nós tivéssemos a menor ideia do que é o mundo, passaríamos nossas vidas em dar-lhe adeus."},{"t":"p","x":"Se formos pensar bem, meus amigos, todos os dias estamos dando adeus a este mundo. Somos como viajantes que desfrutam da beleza da paisagem apenas enquanto estão viajando. Mais cedo do que esperamos, veremos o tempo que deixamos para trás. E é exatamente a mesma coisa com os prazeres e bens dos quais nos tornamos tão apegados."},{"t":"p","x":"Chegará o dia em que a Eternidade jogará todas essas coisas num profundo abismo. E então, meus caros irmãos, o mundo desaparecerá para sempre dos nossos olhos e reconheceremos a nossa loucura em termos sido tão apegados a ele."},{"t":"p","x":"E a respeito de tudo o que nos foi dito sobre o pecado? Só então veremos que era tudo verdade! Coitado daquele que tiver vivido somente para o mundo! Aquele que não buscou outra coisa senão o mundo em tudo aquilo que fez... De repente todos os prazeres e alegrias do mundo já não mais existem! Tudo estará escapulindo de suas mãos: o mundo, suas alegrias, todos os prazeres que ocupavam seu coração e o que é pior: também SUA ALMA!”"}]},"2":{"s":"Por Santo Afonso Maria de Ligório","b":[{"t":"p","x":"Que é propriamente este mundo? Um campo cheio de espinhos, lágrimas e dores. O mundo promete grandes recompensas a seus sequazes: divertimentos, alegrias e paz; tudo, porém, se reduz a ilusão, amargura e vaidade. As riquezas honras e prazeres mundanos transformam-se finalmente em tormentos e aflições."},{"t":"p","x":"Os bens deste mundo não podem saciar o nosso coração. Os animais que foram criados para a Terra, contentam-se com o terrestre; mas o homem que foi criado para Deus, só em Deus pode achar sua satisfação. É o que nos ensina a experiência, pois se os bens terrenos tornassem felizes os homens, seriam certamente felizes os príncipes deste mundo, que possuem em abundância dinheiro, honras e alegrias. E o que vemos? Eles vivem mais descontentes e incomodados que os outros homens, pois onde há maior riqueza e dignidade, reina também maior temor, amargura e inquietação."}]},"3":{"s":"Por Santo Afonso Maria de Ligório","b":[{"t":"p","x":"Todos os bens e alegrias do mundo, portanto, não podem tornar feliz o coração do homem. Quem, pois o poderá contentar? Deus! \"Regozija-se no Senhor, e Ele te dará o que pede teu coração\" (Sl 36,4). O coração do homem suspira continuamente por um bem que o satisfaça; ainda que nade em riquezas, honras e prazeres, não encontrará nestes bens finitos seu contentamento, já que foi criado para um bem infinito. Encontrando Deus e unindo-se a Ele, sentir-se-á então plenamente feliz e não desejará mais nada. \"Coloca no Senhor teu prazer e Ele te dará o que deseja teu coração.\""},{"t":"p","x":"Enquanto S. Agostinho corria atrás dos prazeres dos sentidos, não achou a paz: tendo-se dado, porém, a Deus, encontrou o que procurava."},{"t":"h","x":"Do livro Confissões, 1.6, c.16"},{"t":"p","x":"\"Inquieto, Senhor, está o nosso coração até que descanse em Vós\"."},{"t":"p","x":"\"Ó meu Deus, agora reconheço que tudo é vaidade e aflição de espírito e que só Vós sois a verdadeira paz da alma; tudo acarreta tribulação, só Vós trazeis a paz\"\n\"Que procuras, ó homem, prendendo-te a tantos bens? Procura o único Bem que em Si encerra todos os outros bens.\""}]},"4":{"s":"Por Santo Afonso Maria de Ligório","b":[{"t":"p","x":"A maior preocupação, para não dizer única, dos santos foi: desejarem com todo o afeto sofrer por amor de Deus todo o trabalho, todo o desprezo e toda a dor a fim de tornarem-se desta sorte agradáveis ao Coração divino que tanto merece ser amado e tanto nos ama. — Com efeito, toda a perfeição e todo o amor de uma alma para com Deus consiste em sempre procurar o agrado de Deus e fazer o que mais Lhe agrada. Ó feliz de quem sempre pudesse dizer com Jesus Cristo: “Eu faço sempre o que Lhe agrada.” - Jo 8,29"},{"t":"p","x":"Que honra mais sublime, que consolação maior pode ter uma alma, do que fazer qualquer trabalho, ou aceitar alguma pena, alguma enfermidade, com o pensamento de dar assim gosto a Deus? Temos sobeja obrigação de dar gosto ao Deus que nos amou tanto, nos deu tudo o que possuímos, e, não satisfeito com dar-nos tantos bens, chegou a dar-se a si mesmo, primeiro sobre a cruz, na qual morreu por nosso amor, e depois no Santíssimo Sacramento do altar, no qual se nos dá todo inteiro pela santa comunhão, de sorte que não Lhe resta mais nada para dar."},{"t":"p","x":"Para se tornarem agradáveis a Deus, os santos desapossaram-se de seus bens, renunciaram às mais altas dignidades da terra e acolheram como tesouros as enfermidades, as perseguições, e despojamento de tudo, e a morte mais dolorosa e triste. E que fazemos nós para um fim tão sublime? Ó miséria! Recusamo-nos até a sofrer com paciência um leve incômodo, uma pequena contrariedade, um desprezo, uma palavra mordaz."},{"t":"p","x":"Se temos verdadeiro amor a Deus, devemos preferir a Sua satisfação à aquisição de todas as riquezas, das glórias mais altas e de todas as delícias da Terra."}]},"5":{"s":"Pensamentos de São João Maria Vianney - O Cura d'Ars","b":[{"t":"p","x":"Meus, filhos, nós temos medo da morte, bem o creio. É o pecado que nos faz ter medo da morte. É o pecado que torna a morte horrorosa, tremenda. É o pecado que apavora o mau na hora do terrível trânsito para a eternidade."},{"t":"p","x":"Ai, meu Deus, há realmente de que ficar apavorado: pensar que se é amaldiçoado! Amaldiçoado por Deus, isto faz tremer. Maldito de Deus! E por quê? Por que os homens expõem-se a ser amaldiçoados por Deus? Por uma blasfêmia, por um mau pensamento, por uma garrafa de vinho, por dois minutos de prazer perder a Deus, a própria alma, perder o céu para sempre."},{"t":"p","x":"Ver-se-á subir ao céu em corpo e alma, esse pai, essa mãe, essa irmã, esse vizinho, que estavam lá junto de nós, com quem havíamos vivido, mas a quem não imitamos, ao passo que nós desceremos em corpo e alma ao inferno para aí ardermos. Os demônios rolarão sobre nós. Todos aqueles cujos conselhos houvermos seguido virão atormentar-nos."},{"t":"p","x":"Meus filhos, se vísseis um homem erguer uma grande fogueira, amontoar gravetos uns sobre os outros e, perguntando-lhe o que faz ele, vos respondesse: “Estou preparando o fogo que me há de queimar” que pensaríeis? E se vísseis esse mesmo homem aproximar-se à chama da fogueira e, quando estivesse acesa, precipitar-se dentro, que diríeis? Cometendo o pecado, é assim que fazemos. Não é Deus que nos lança no inferno, somos nós que nos lançamos nele pelos nossos pecados. O condenado dirá; “Perdi Deus, minha alma e o céu. Foi por minha culpa, por minha culpa, por minha máxima culpa.”"},{"t":"p","x":"Não, verdadeiramente, se os pecadores pensassem na eternidade, nesse terrível SEMPRE, converter-se-iam in continenti. Faz perto de seis mil anos que Caim está no inferno, e parece que acabou de entrar nele."}]},"6":{"s":"Por Santo Afonso Maria de Ligório","b":[{"t":"p","x":"Meu Senhor e Deus de infinita majestade! Envergonho-me de aparecer ante Vossa presença. Quantas vezes injuriei Vossa honra, preferindo à Vossa graça um indigno prazer, um ímpeto de cólera, um pouco de barro, um capricho, um fumo leve! Adoro e beijo Vossas Santas Chagas, que Vos infligi com meus pecados. Pelas mesmas espero meu perdão e salvamento. Fazei-me conhecer, ó Jesus, a gravidade da ofensa que cometi, sendo como sois a fonte de todo o bem e eu Vos abandonei para saciar-me em águas corruptas e envenenadas. Que me resta de tantas ofensas, senão angústia, remorsos e méritos para o Inferno? “Meu pai, não sou digno de chamar-me Vosso filho” (Lc 15,21). Não me abandoneis, Pai."},{"t":"p","x":"Verdade é que não mereço a graça de chamar-me Vosso filho. Mas morrestes para salvar-me. Dissestes, Senhor: “Convertei-vos a Mim e Eu me voltarei para vós” (Zc 1,3). Renuncio, pois, a todas as minhas satisfações. Deixo no mundo quantos prazeres se me podem oferecer e me converto a Vós."},{"t":"p","x":"Perdoai-me, pelo Sangue que derramastes por mim. Senhor, arrependo-me e Vos amo sobre todas as coisas. Não sou digno de Vos amar, mas Vós, que mereceis tanto amor, não desprezeis o amor de um coração que em outro tempo Vos desprezava. A fim de que Vos amasse, não me deixastes morrer quando me achava em estado de pecado."},{"t":"p","x":"Quero amar-Vos na vida que me resta, e não amar a nada mais que a Vós. Assisti-me, meu Deus; dai-me o dom da perseverança e o Vosso santo amor."},{"t":"p","x":"Maria, meu refúgio, recomendai-me a Jesus Cristo."}]},"7":{"s":"Imitação de Cristo, Livro I, capítulo XIII,1-5","b":[{"t":"h","x":"A resistência às tentações"},{"t":"p","x":"Enquanto vivemos no mundo, não podemos estar sem trabalhos e tentações. Por isso está escrito no livro de Jó: \"A vida do homem sobre a terra é uma contínua tentação\" (7,1)."},{"t":"p","x":"Cada qual, pois, deve ser muito cuidadoso nas tentações, procurando, vigilante na oração, não dar lugar às ilusões do demônio, que nunca dorme, nem cessa de andar à roda das almas para as devorar (1Pd 5,8)."},{"t":"p","x":"Ninguém há tão santo e tão perfeito, que não tenha algumas vezes tentações, e não podemos viver sem elas."},{"t":"p","x":"Se bem que inoportunas e penosas, as tentações são muitas vezes utilíssimas ao homem, porque através delas se humilha, se instrui e se purifica."},{"t":"p","x":"Todos os santos passaram por muitas tentações e trabalhos e foi assim que progrediram na santidade."},{"t":"p","x":"E os que não quiseram suportá-los, falharam e condenaram-se."},{"t":"p","x":"Não há ordem tão santa nem lugar tão retirado onde não haja tentações e adversidades. Nenhum homem está inteiramente livre de tentações enquanto vive; porque em nós mesmos está a causa donde elas vêm, pois nascemos com inclinação ao pecado."},{"t":"p","x":"Passada uma tentação ou tribulação, sobrevém outra, e sempre teremos que sofrer, porque se perdeu o bem de nossa primeira felicidade. Muitos querem fugir às tentações e caem nelas mais gravemente. Mas, não é fugindo que podemos vencê-las, porém é com paciência e verdadeira humildade que nos fazemos mais fortes que todos os nossos inimigos."},{"t":"p","x":"Quem somente evita as ocasiões exteriores e não arranca o mal pela raiz, pouco aproveitará; antes lhe tornarão mais depressa as tentações e se achará pior que dantes. Com a ajuda de Deus, mais facilmente vencerás, com paciência e perseverança, do que com teu próprio esforço e fadiga."},{"t":"p","x":"Toma muitas vezes conselho na tentação, e não sejas desabrido e áspero como que está tentado, antes procura consolá-lo como quiseras ser consolado. O princípio de toda a tentação é a inconstância de ânimo e a pouca confiança em Deus. Como um navio sem leme é levado pelas ondas em todas as direções, assim o homem negligente e inconstante em seus propósitos é tentado de todas as maneiras."}]},"8":{"s":"Imitação de Cristo, Livro I, capítulo XVIII,5-7","b":[{"t":"p","x":"O fogo prova o ferro, e a tentação o justo. Muitas vezes não sabemos o que podemos; mas a tentação mostra-nos o que somos. Devemos, pois, vigiar principalmente no princípio da tentação, porque mais"},{"t":"p","x":"facilmente se vence o inimigo quando não o deixamos passar da porta da alma, e lhe saímos ao encontro, logo que bate. Donde veio dizer um poeta:"},{"t":"v","x":"Resiste no princípio,\nTarde chega o remédio\nSe já, por largo tempo,\nO mal lançou raízes."},{"t":"p","x":"Porque, primeiramente, se oferece à alma um simples pensamento, podeis, a importuna imaginação, logo o prazer, o movimento desordenado e o consentimento da vontade. E assim pouco a pouco entra o Inimigo e se apodera de tudo, porque se lhe não resistiu no princípio."},{"t":"p","x":"E quanto mais preguiçoso for o homem em resistir-lhe, tanto se fará cada dia mais fraco, e o inimigo contra ele mais poderoso. Alguns padecem graves tentações no princípio de sua conversão, outros, no fim, muitos por toda a vida."},{"t":"p","x":"Alguns são tentados brandamente, segundo a sabedoria e a eqüidade da Divina Providência, que pondera o estado e os méritos dos homens, e tudo ordena para a salvação de seus escolhidos. Por isso, não devemos desconfiar quando formos tentados; mas antes rogar a Deus com maior fervor para que se digne ajudar-nos em toda a atribuição; porque, segundo o dito de São Paulo, nos dará o auxílio junto com a tentação para que lhe possamos resistir (1Cor 10,13). Humilhemos, pois, nossas almas, debaixo da mão de Deus em toda tribulação e tentação, porque ele há de salvar e engrandecer os humildes de espírito (Sl 33,19). É nas tentações e nos reveses que o homem verifica quanto progrediu; por elas maior se torna o mérito, e melhor se revelam as virtudes."}]},"9":{"s":"Por São Francisco de Sales","b":[{"t":"p","x":"“Se alguém quer vir atrás de mim, diz Nosso Senhor, tome a sua cruz e siga-Me.” Tomar a sua cruz significa receber e sofrer todas as nossas penas, contradições, aflições e mortificações, que nesta vida nos acontecem, sem exceção alguma, com uma inteira submissão e indiferença. Imolemos muitas vezes o nosso coração do nosso amor de Jesus Cristo sobre o próprio altar da cruz, onde Ele imolou o seu amor pelo nosso. A cruz, é a porta real para entrar no templo da santidade; aquele que a busca fora daí, não a encontra. As melhores cruzes são as mais pesadas e as mais pesadas são as que mais incomodam a parte inferior da alma."},{"t":"p","x":"As cruzes que encontramos pelas ruas são excelentes, e ainda mais as que encontramos em casa, e quanto mais importunas melhores; Humilhai-vos e recebei com alegria as que vos impuserem contra vossa vontade. O cumprimento da cruz aumenta muito o seu preço: sede fiéis até à morte e tereis a coroa da glória."},{"t":"p","x":"Recebamos com amor as cruzes que não escolhemos e que Deus nos deu; bendiga- mo-las, ame-mo-las, estão todas perfumadas com a excelência do lugar donde vêm. Onde houver menos escolha há mais agrado de Deus.\""}]},"10":{"s":"Mateus 5,1-19","b":[{"t":"p","x":"\"Vendo aquelas multidões, Jesus subiu à montanha. Sentou-Se e Seus discípulos aproximaram-se d'Ele. Então abriu a boca e lhes ensinava, dizendo: Bem-aventurados os que têm um coração de pobre, porque deles é o Reino dos Céus! Bem-aventurados os que choram, porque serão consolados! Bem-aventurados os mansos, porque possuirão a Terra! Bem-aventurados os que têm fome e sede de justiça, porque serão saciados! Bem-aventurados os misericordiosos, porque alcançarão misericórdia! Bem-aventurados os puros de coração, porque verão Deus! Bem-aventurados os pacíficos, porque serão chamados filhos de Deus! Bem-aventurados os que são perseguidos por causa da justiça, porque deles é o Reino dos Céus! Bem-aventurados sereis quando vos caluniarem, quando vos perseguirem e disserem falsamente todo o mal contra vós por causa de Mim."},{"t":"p","x":"Alegrai-vos e exultai, porque será grande a vossa recompensa nos céus, pois assim perseguiram os profetas que vieram antes de vós."},{"t":"p","x":"Vós sois o sal da Terra. Se o sal perde o sabor, com que lhe será restituído o sabor? Para nada mais serve senão para ser lançado fora e calcado pelos homens."},{"t":"p","x":"Vós sois a luz do mundo. Não se pode esconder uma cidade situada sobre uma montanha nem se acende uma luz para colocá-la debaixo do alqueire, mas sim para colocá-la sobre o candeeiro, a fim de que brilhe a todos os que estão em casa. Assim, brilhe vossa luz diante dos homens, para que vejam as vossas boas obras e glorifiquem vosso Pai que está nos Céus."},{"t":"p","x":"Não julgueis que vim abolir a lei ou os profetas. Não vim para os abolir, mas sim para levá-los à perfeição. Pois em verdade vos digo: passará o céu e a terra, antes que desapareça um jota, um traço da lei."},{"t":"p","x":"Aquele que violar um destes mandamentos, por menor que seja, e ensinar assim aos homens, será declarado o menor no Reino dos Céus. Mas aquele que os guardar e os ensinar será declarado grande no Reino dos Céus.\""}]},"11":{"s":"Tiago, 1,21-25","b":[{"t":"p","x":"“Rejeitai, pois, toda impureza e todo vestígio de malícia e recebei com mansidão a palavra em vós semeada, que pode salvar as vossas almas. Sede cumpridores da palavra e não apenas ouvintes; isto equivaleria a vos enganardes a vós mesmos."},{"t":"p","x":"Aquele que escuta a palavra sem a realizar assemelha-se a alguém que contempla num espelho a fisionomia que a natureza lhe deu: contempla-se e, mal sai dali, esquece-se de como era."},{"t":"p","x":"Mas aquele que procura meditar com atenção a lei perfeita da liberdade e nela persevera - não como ouvinte que facilmente se esquece, mas como cumpridor fiel do preceito -, este será feliz no seu proceder.\""}]},"12":{"s":"Por Santo Afonso Maria de Ligório","b":[{"t":"p","x":"Ó meu Senhor, como foi possível que eu, ingrato, em vez de Vos dar gosto, Vos tenha causado tantos desgostos? Mas o horror que me inspirais das ofensas que Vos fiz, me faz esperar que me queirais perdoar. Perdoai-me e não permitais que torne a ser ingrato para Convosco."},{"t":"p","x":"Ah, meu Jesus, oxalá nunca Vos tivesse ofendido! Se pudesse nascer outra vez, quisera amar-Vos sempre! Mas o que foi feito, já se não pode desfazer."},{"t":"p","x":"O que posso fazer é consagrar-Vos toda a vida que me resta. Eu Vô-la dou toda e me consagro todo a Vosso amor. Afetos terrestres, saí do meu coração, cedei o lugar a meu Deus, que o quer possuir todo. — Sim, possui-me todo, ó meu Redentor, meu amor, meu Deus. Daqui por diante não quero pensar senão em Vos agradar; ajudai-me com a Vossa graça; a minha esperança está em Vossos méritos. Aumentai em mim cada vez mais o Vosso amor e o desejo de Vos dar gosto. Fazei com que eu vença tudo para Vos agradar. “Em Ti, Senhor, esperei, eternamente não serei confundido”. - (Salmos 30,1)"},{"t":"p","x":"Ó Rainha do Céu e minha Mãe Maria, atraí-me todo para Jesus Cristo."}]},"13":{"s":"Meditação sobre o nosso fundo mau - São Luís de Montfort","b":[{"t":"p","x":"Para nos despojar de nós mesmos é preciso: Em primeiro lugar, conhecer bem, pela luz do Espírito Santo, o nosso fundo mau, a nossa incapacidade para qualquer bem útil à salvação, a nossa fraqueza em todas as coisas, a nossa permanente inconstância, a nossa indignidade de toda - a graça, a nossa iniqüidade em toda a parte."},{"t":"p","x":"O pecado dos nossos primeiros pais arruinou-nos a todos quase por completo, azedou-nos, corrompeu-nos, fez-nos inchar como o fermento faz à massa em que é lançado."},{"t":"p","x":"Os pecados atuais que cometemos, quer mortais, quer veniais, embora tenham sido perdoados, aumentaram-nos a concupiscência, a fraqueza, a inconstância e corrupção, deixando maus vestígios na nossa alma."},{"t":"p","x":"O nosso corpo é tão corrupto que é chamado pelo Espírito Santo corpo de pecado (Rm 6, 6; Sl 50, 7), concebido no pecado, alimentado no pecado, capaz de todo pecado e sujeito a mil enfermidades. Corrompe-se de dia a dia, e gera somente sarna, vermes e corrupção."},{"t":"p","x":"A nossa alma, unida ao corpo, tornou-se tão carnal que chega a ser chamada carne: “Toda a carne tinha corrompido o seu caminho” (Gn 6, 12). A nossa única herança é o orgulho e a cegueira de espírito, o endurecimento do coração, a fraqueza e a inconstância da alma, a concupiscência, a revolta das paixões e as doenças do corpo."},{"t":"p","x":"Somos, naturalmente, mais orgulhosos que os pavões, mais apegados à Terra que os sapos, piores que os bodes, mais invejosos que as serpentes, mais gulosos que os porcos, mais coléricos que os tigres e mais preguiçosos que as tartarugas, mais fracos que caniços e mais inconstantes que os cata-ventos. De nosso só temos o nada e o pecado, e só merecemos a ira de Deus e o inferno eterno."},{"t":"p","x":"Depois disto, será para admirar que Nosso Senhor tenha dito que quem o quisesse seguir devia renunciar a si mesmo e odiar a sua própria alma? (Mt 16, 24). Que aquele que amasse a sua alma a perderia, e o que a odiasse a salvaria? (Jo 12, 25). Esta Sabedoria infinita, que não impõe mandamentos sem razão, não nos manda odiarmo-nos a nós mesmos senão porque somos sumamente dignos de ódio. Nada há tão digno de amor como Deus, e nada tão digno de ódio como nós."}]},"14":{"s":"Que o homem de si nada tem de bom, nem coisa alguma de que gloriar-se","b":[{"t":"p","x":"\"Senhor, que é o homem, para que vos lembreis dele, ou o filho do homem, para que o visiteis?\" - Salmos 8,5"},{"t":"h","x":"Imitação de Cristo, Livro III, capítulo XL, 1-2"},{"t":"p","x":"\"Por onde mereceu o homem que lhe deis a Vossa graça? Como me posso queixar, se me desamparais, ou que posso justamente opor, se não me concedeis o que peço? Decerto, com verdade posso pensar e dizer: Senhor, nada sou, nada posso, nada de bom tenho de mim mesmo, mas falta-me tudo, e sempre pendo para o nada. E se Vós não me ajudais e ensinais, fico de todo tíbio e relaxado. Vós, porém, Senhor, sempre sois o mesmo e permaneceis eternamente bom, justo e santo, e boas são Vossas obras todas, e justas e santas, e dispondes tudo com sabedoria. Mas eu, que sou mais inclinado à negligência que ao aproveitamento espiritual, não sei conservar-me no mesmo estado, porque mudo sete vezes por dia. Mas logo me vai melhor, quando Vos apraz estender-me a mão para me socorrer; porque só Vós, sem auxílio humano, me podeis ajudar e dar-me firmeza, de tal modo que jamais se mude meu rosto, mas só a Vós se converta meu coração e em Vós descanse.\""},{"t":"h","x":"Imitação de Cristo, Livro III, capítulo VII, 4"},{"t":"p","x":"\"Quem se dá por muito seguro no tempo de paz, muitas vezes se revela tímido e covarde em tempo de guerra. Se te souberes conservar sempre humilde e pequeno no teu conceito, e governar com moderação teu espírito, não cairás tão depressa na tentação e no pecado. É de aconselhar, quando sentes fervor de espírito, meditar no que será de ti, retirando-se esta graça.\""}]},"15":{"s":"Por Santo Afonso Maria de Ligório","b":[{"t":"p","x":"Eis aí o que é o homem, considerado como criatura mortal. Eis aí o estado em que todos nós seremos reduzidos: um punhado de pó. Nada importa ser alguém moço ou velho, são ou enfermo, a todos caberá a mesma sorte: “Lembra-te, ó homem, que és pó e em pó te hás de tornar”."},{"t":"p","x":"Os insensatos que não creem na vida futura e têm as Verdades Eternas por fábulas, estimulam-se, com a lembrança da morte, a levar vida folgada e a gozarem. — “Comamos e bebamos, porque amanhã morreremos”."},{"t":"p","x":"De maneira bem diferente, porém, diz Santo Agostinho, deve proceder o cristão, que pela fé sabe que a alma sobrevive ao corpo e que, depois da morte deste, terá de dar contas rigorosíssimas de tudo quanto tiver feito. O cristão, que se lembra que em breve deverá deixar o mundo, cuidará da sua eternidade e procurará aplacar a justiça divina com penitências e orações."},{"t":"p","x":"Portanto, sejamos “mais sóbrios em palavras, na comida, na bebida, no sono, nos divertimentos”; e, o que é mais necessário, afastemo-nos mais de toda a culpa por meio de uma vida recolhida e consagrada à oração, porquanto, no dizer de São Leão, “sem proveito se subtrai o alimento ao corpo, se o espírito não se afasta mais da iniquidade”"}]},"16":{"s":"Imitação de Cristo, Livro II, capítulo V,1","b":[{"t":"p","x":"Da consideração de si mesmo Não devemos confiar demasiado em nós mesmos, porque muitas vezes nos faltam a graça e o discernimento. Pouca luz há em nós, e esse pouco perdemo-lo depressa, por nossos descuido. Muitas vezes também agimos mal, e ainda pior nos desculpamos. Às vezes somos levados pela paixão, e julgamos que é o zelo. Repreendemos nos outros as faltas pequenas e desculpamos as nossas, mesmo as mais graves. Mui depressa sentimos e nos magoamos como que sofremos dos outros; mas não pensamos muito"},{"t":"p","x":"no quanto os outros sofrem por causa de nós. O que bem e retamente examinar suas ações, não terá que julgar severamente as alheias."}]},"17":{"s":"Imitação de Cristo, Livro I, capítulo XXIV, 1 - 4","b":[{"t":"p","x":"Do juízo e penas dos pecadores Em todas as coisas olha o fim, e como se encontrarás diante daquele retíssimo Juiz para quem nada há oculto, que não se abranda com presentes, nem admite desculpas, mas julgará segundo a justiça. Ó néscio e miserável pecador! Que responderás a Deus que sabe todas as tuas maldades, tu que às vezes temes o rosto de um homem irado? Por que não te acautelas para o Dia do Juízo, quando ninguém poderá ser desculpado nem defendido por outrem, mas cada um terá bastante que fazer por si?"},{"t":"p","x":"Grande e salutar purgatório tem nesta vida o homem paciente: se, injuriado, mas se dói da maldade alheia, que da ofensa própria; se, de boa vontade, roga por seus adversários, e de todo o coração perdoa os agravos; se não tarda em pedir perdão aos outros; se mais facilmente se compadece do que se irrita; se constantemente faz violência a si mesmo, e se esforça por submeter de todo a carne ao espírito. Melhor é expiar já os pecados e extirpar os vícios, que adiar a expiação para mais tarde. Com efeito, nós enganamos a nós mesmos pelo amor desordenado que temos à carne."},{"t":"p","x":"Que outra coisa há de devorar aquele fogo senão os teus pecados? Quanto mais te poupas agora e segues a carne, tanto mais cruel será depois o tormento e tanto mais lenha ajuntas para a fogueira. Naquilo em que o homem mais pecou, será mais gravemente castigado. Ali os preguiçosos serão incitados por aguilhões ardentes, e os gulosos serão atormentados por violenta fome e sede. Os impudicos e voluptuosos serão banhados em pez ardente e fétido enxofre, e os invejosos uivarão de dor, à semelhança de cães furiosos."},{"t":"p","x":"Não há vício que não tenha o seu tormento especial. Ali, os soberbos serão acabrunhados de profunda confusão, e os avarentos oprimidos com extrema penúria. Ali será mais cruel uma hora de suplício do que cem anos aqui da mais rigorosa penitência. Ali não há descanso nem consolação para os condenados, enquanto aqui, às vezes, cessa o trabalho e nos consolam os amigos. Relembra agora e chora teus pecados, para que no Dia do Juízo estejas seguro entre os escolhidos."}]},"18":{"s":"Imitação de Cristo, Livro III, capítulo XL, 3-5","b":[{"t":"p","x":"Se eu bem soubesse desprezar todas as consolações humanas, já para adquirir o santo fervor, já pela infeliz necessidade que me obriga a buscar em Vós a verdadeira consolação que nenhum homem pode dar-me, então teria eu grande motivo para esperar com razão Vossa graça e para alegrar-me com o dom duma nova consolação."},{"t":"p","x":"Graças Vos dou, Senhor, por serdes a fonte de que dimana todo o bem que me sucede. Eu, homem inconstante e frágil, não sou na Vossa presença mais que um nada e uma pura vaidade. De que posso eu pois gloriar-me, ou com que motivo desejo ser estimado? Acaso por ser um nada? Porém que coisa mais insensata e vaidosa!"},{"t":"p","x":"A vã glória é, na verdade, uma peste detestável e um mal terrível, porque nos aparta da verdadeira glória e nos despoja da graça celestial."},{"t":"p","x":"Desde que o homem se compraz em si mesmo, começa a desagradar-Vos; e logo que aspira aos louvores humanos, perde a verdadeira virtude."},{"t":"p","x":"A verdadeira glória e a santa alegria consistem em gloriar-se cada um em Vós e não em si; em alegrar-se de Vossa grandeza e não de sua própria virtude; em não achar prazer em criatura alguma senão por amor de Vós."},{"t":"p","x":"Seja louvado Vosso Nome e não o meu; engrandecidas sejam Vossas obras e não as minhas. Louvem e abençoem todos os homens a Vossa grandeza e nada participe eu de seus louvores."},{"t":"p","x":"Vós sois minha glória, Vós sois a alegria de meu coração. Todo o dia me gloriarei e alegrarei em Vós; pois em mim nada tenho em que gloriar-me, \"senão em minhas fraquezas\". (2 Cor 12,5)"}]},"19":{"s":"Isaías 7,14","b":[{"t":"p","x":"“Eis que a Virgem conceberá e dará à luz um Filho, e Ele será chamado de Emanuel”, que significa “Deus conosco”."},{"t":"h","x":"Lucas 1,26-33"},{"t":"p","x":"\"O Anjo Gabriel foi enviado por Deus a uma cidade da Galileia, chamada Nazaré, a uma Virgem desposada com um homem que se chamava José, da casa de Davi e o nome da Virgem era Maria."},{"t":"p","x":"Entrando, o Anjo disse-Lhe: “Ave, cheia de graça, o Senhor é Contigo”."},{"t":"p","x":"Perturbou-se Ela com essas palavras e pôs-se a pensar no que significaria semelhante saudação."},{"t":"p","x":"O Anjo disse-Lhe: “Não temas, Maria, pois encontraste graça diante de Deus. Eis que conceberás e darás à luz um Filho, e Lhe porás o nome de Jesus."},{"t":"p","x":"Ele será grande e será chamado Filho do Altíssimo, e o Senhor Deus Lhe dará o Trono de Seu pai Davi; e reinará eternamente na casa de Jacó, e o Seu Reino não terá fim”.\""},{"t":"h","x":"Santo Afonso Maria de Ligório"},{"t":"p","x":"Em uma palavra, é tão grande a dignidade da Virgem, que, se bem que Deus só com a Sua sabedoria infinita a possa compreender, todavia, no dizer de São Boaventura, com toda a Sua onipotência não pode fazer outra maior. Quem considerar isto, deixará de estranhar porque os santos Evangelistas, que tão difusamente registram os louvores de um João Batista, de uma Madalena, tão escassos se mostram em descrever as grandezas de Maria. Tendo dito que desta exímia Virgem nasceu Jesus, não julgaram necessário acrescentar outra coisa; porque neste Seu maior privilégio se acham incluídos os demais. Qualquer titulo que se lhe dê, nunca chegará a honrá-la tanto quanto o de Mãe de Deus."}]},"20":{"s":"São Luís de Montfort - Tratado da Verdadeira Devoção","b":[{"t":"p","x":"Como na geração natural e corporal há um pai e uma mãe, assim também na geração sobrenatural e espiritual há um Pai, que é Deus, e uma Mãe, que é Maria. Todos os verdadeiros filhos de Deus e predestinados têm a Deus por Pai e a Maria por Mãe; e quem a não tem por Mãe, não tem Deus por Pai. Eis porque os réprobos, como os heréticos, os cismáticos etc., que odeiam ou olham com desprezo ou com indiferença a Santíssima Virgem, não têm Deus por Pai, ainda que disto se gloriem, porque não têm Maria por Mãe. Pois se A tivessem por Mãe, honra-La-iam e ama-La-iam como um verdadeiro e bom filho ama e honra naturalmente sua Mãe, que lhe deu a Vida."},{"t":"p","x":"O sinal mais infalível e indubitável para distinguir um herético, um homem de má doutrina, um réprobo de um predestinado, é que o herético e o réprobo não têm senão desprezo ou indiferença pela Santíssima Virgem. Com suas palavras e exemplos, abertamente ou às ocultas, esforçam-se por lhe diminuir o culto e"},{"t":"p","x":"o amor, e isso por vezes sob belos pretextos. Ah! Deus Pai não disse a Maria para habitar com eles, porque são Esaús."},{"t":"p","x":"Deus Filho quer ser formado e, por assim dizer, encarnar todos os dias por intermédio de Sua muito amada Mãe, nos Seus membros, e diz-Lhe: “Recebe Israel por herança” (Eclo 24, 13). É como Se dissesse: Meu Pai deu-Me por herança todas as nações da Terra, todos os homens, bons e maus, predestinados e réprobos. Conduzirei uns com vara de ouro e outros com vara de ferro. Serei Pai e Advogado de uns, Justo Vingador de outros e Juiz de todos. Mas Vós, minha Mãe, não tereis por herança e posse senão os predestinados, de quem Israel é figura. Como sua boa Mãe os dareis à luz, os alimentareis e educareis; como sua Soberana os conduzireis, governareis e defendereis."}]},"21":{"s":"São Luís de Montfort - Tratado da Verdadeira Devoção","b":[{"t":"p","x":"A verdadeira devoção à Santíssima Virgem é interior, isto é, parte do espírito e do coração. Vem da estima em que se tem a Santíssima Virgem, da alta ideia que se formou de Suas grandezas, e do amor que se Lhe consagra."},{"t":"p","x":"A verdadeira devoção à Santíssima Virgem é terna, quer dizer cheia de confiança na Santíssima Virgem, da confiança de um filho em sua mãe. Impele uma alma a recorrer a Ela em todas as necessidades do corpo e do espírito, com extremos de simplicidade, de confiança e de ternura."},{"t":"p","x":"A verdadeira devoção à Santíssima Virgem é santa: leva uma alma a evitar o pecado e a imitar as virtudes da Santíssima Virgem, principalmente Sua humildade profunda, Sua contínua oração, Sua obediência cega, Sua fé viva, Sua mortificação universal, Sua pureza divina, Sua caridade ardente, Sua paciência heroica, Sua doçura angélica e Sua sabedoria divina. Aí estão as dez virtudes principais da Santíssima Virgem."},{"t":"p","x":"A verdadeira devoção à Santíssima Virgem é constante, firma uma alma no bem, e ajuda-a a perseverar em suas práticas de devoção. Torna-a corajosa para se opor ao mundo em suas modas e máximas, à carne, em seus aborrecimentos e paixões, e ao demônio, em suas tentações. Assim, uma pessoa verdadeiramente devota da Santíssima Virgem não é volúvel, nem se deixa dominar pela melancolia, pelos escrúpulos ou pelos receios."},{"t":"p","x":"A verdadeira devoção à Virgem Santíssima é desinteressada, leva a alma a buscar não a si mesma, mas somente a Deus em Sua Mãe Santíssima. O verdadeiro devoto de Maria não serve a esta augusta Rainha por espírito de lucro e de interesse, nem para seu bem temporal ou eterno, corporal ou espiritual, mas unicamente porque Ela merece ser servida, e Deus exclusivamente n'Ela."}]},"22":{"s":"São Luís de Montfort - Tratado da Verdadeira Devoção","b":[{"t":"p","x":"Esta devoção é um caminho fácil, curto, perfeito e seguro para chegar à união com Nosso Senhor, e nisto consiste a perfeição do cristão."},{"t":"p","x":"É um caminho fácil; é um caminho que Jesus Cristo abriu quando veio a nós, e no qual não há obstáculo que nos impeça de chegar a Ele."},{"t":"p","x":"Esta devoção à Santíssima Virgem é um caminho curto para encontrar Jesus Cristo, seja porque dele não nos extraviamos, seja porque, como acabo de dizer, nele marchamos com mais alegria e facilidade, e, consequentemente, com mais prontidão. Avançamos mais, em pouco tempo de submissão e dependência a Maria, do que em anos inteiros de vontade própria e contando apenas com o próprio esforço."},{"t":"p","x":"Esta prática de devoção à Santíssima Virgem é um caminho perfeito para ir e unir-se a Jesus Cristo, pois Maria é a mais perfeita e a mais santa das criaturas, e Jesus Cristo, que veio perfeitamente a nós, não tomou outro caminho em Sua grande e admirável viagem. O Altíssimo, o Incompreensível, o Inacessível, aquele que é, quis vir a nós, pequenos vermes da terra, que nada somos. Como se fez isto? O Altíssimo desceu perfeita e divinamente até nós por meio da humilde Maria, sem nada perder de Sua divindade e santidade; e por Maria que os pequeninos devem subir perfeita e divinamente ao Altíssimo sem recear coisa alguma."},{"t":"p","x":"Esta devoção à Santíssima Virgem é um caminho seguro para irmos a Jesus Cristo e adquirirmos a perfeição, unindo-nos a Ele: Porque esta prática, preconizada por mim, não é nova; é tão antiga, que não se pode (...) determinar-lhe com toda a precisão os começos. Nem seria possível condená-la sem derrubar os fundamentos do cristianismo. Fica, portanto, de pé que esta devoção não é nova, e que não é comum, por ser preciosa demais para ser apreciada e praticada por todo mundo. Esta devoção é um meio seguro para ir a Jesus Cristo, porque pertence à Santíssima Virgem e Lhe é próprio conduzir-nos a Jesus Cristo, como compete a Jesus Cristo conduzir-nos ao Pai celestial."}]},"23":{"s":"São Luís de Montfort - Tratado da Verdadeira Devoção","b":[{"t":"p","x":"Convencei-vos de que, se vos tornardes fiel às práticas interiores e exteriores desta devoção, que vos indico em seguida:"},{"t":"p","x":"Primeiro efeito: Pela luz que o Espírito Santo vos dará por intermédio de Maria, Sua querida Esposa, conhecereis vosso fundo mau, vossa corrupção e vossa incapacidade para todo bem, e, em consequência deste conhecimento, vos desprezareis, e será com horror que pensareis em vós mesmo. A humilde. Maria vos dará, enfim, parte de sua profunda humildade, com que vos desprezareis a vós mesmo, sem desprezar pessoa alguma, e gostareis até de ser desprezado."},{"t":"p","x":"Segundo efeito: A Santíssima Virgem vos dará uma parte de Sua fé, a maior que já houve na Terra, maior que a de todos os Patriarcas, Profetas, Apóstolos e todos os Santos."},{"t":"p","x":"Terceiro efeito: Esta Mãe do amor formoso (Ecl 24, 24) aliviará vosso coração de todo escrúpulo e de todo temor servil."},{"t":"p","x":"Quarto efeito: A Santíssima Virgem vos encherá de grande confiança em Deus e n'Ela, porque não vos aproximareis mais de Jesus Cristo por vós mesmo, mas sempre. por intermédio desta bondosa Mãe."},{"t":"p","x":"Quinto efeito: A alma da Santíssima Virgem se comunicará a vós para glorificar o Senhor; seu espírito tomará o lugar do Vosso para regozijar-se em Deus, contanto que pratiqueis fielmente esta devoção."},{"t":"p","x":"Sexto efeito: Se Maria, que é a árvore da vida, for bem cultivada em nossa alma pela fidelidade às práticas desta devoção, ela dará fruto em seu tempo; e seu fruto não é outro senão Jesus Cristo."},{"t":"p","x":"Sétimo efeito: Por esta prática, fielmente observada, dareis a Jesus Cristo mais glória em um mês, que por qualquer outra, embora mais difícil, em muitos anos."}]},"24":{"s":"São Luís de Montfort - Tratado da Verdadeira Devoção","b":[{"t":"p","x":"A mais perfeita devoção é aquela pela qual nos conformamos, unimos e consagramos mais perfeitamente a Jesus Cristo, pois toda a nossa perfeição consiste em sermos conformados, unidos e consagrados a Ele. Ora, pois que Maria é, de todas as criaturas, a mais conforme a Jesus Cristo, segue daí que, de todas as devoções, a que mais consagra e conforma uma alma a Nosso Senhor é a devoção à Santíssima Virgem, Sua santa Mãe, e que, quanto mais uma alma se consagrar a Maria, mais consagrada estará a Jesus Cristo. Eis por que a perfeita consagração a Jesus Cristo nada mais é que uma perfeita e inteira consagração à Santíssima Virgem, e nisto consiste a devoção que eu ensino; ou, por outra, uma perfeita renovação dos votos e promessas do santo batismo."},{"t":"p","x":"Esta devoção consiste, portanto, em entregar-se inteiramente à Santíssima Virgem, a fim de, por Ela, pertencer inteiramente a Jesus Cristo. É preciso dar-Lhe:"},{"t":"p","x":"1°- nosso corpo com todos os seus membros e sentidos; 2°- nossa alma com todas as suas potências; 3°- nossos bens exteriores, que chamamos de fortuna, presentes e futuros; 4°- nossos bens interiores e espirituais, que são nossos méritos, nossas virtudes e nossas boas obras passadas, presentes e futuras."},{"t":"p","x":"Numa palavra, tudo que temos na ordem da natureza e na ordem da graça, e tudo que, no porvir, poderemos ter na ordem da natureza, da graça e da glória, e isto sem nenhuma reserva, sem a reserva sequer de um real, de um cabelo, da menor boa ação, para toda a eternidade, sem pretender nem esperar a mínima recompensa de sua oferenda e de seu serviço, a não ser a honra de pertencer a Jesus Cristo por Ela e n'Ela, mesmo que esta amável Senhora não fosse, como é sempre, a mais liberal e reconhecida das criaturas."}]},"25":{"s":"Tratado da Verdadeira Devoção à Santíssima Virgem, 61","b":[{"t":"p","x":"Jesus Cristo, nosso Salvador, verdadeiro Deus e verdadeiro Homem, deve ser o fim último de todas as devoções, de outro modo seriam falsas e enganadoras. Jesus é o alfa e o ômega, o princípio e o fim de todas as coisas. Nós não trabalhamos - como diz o Apóstolo - senão para tornar cada homem perfeito em Jesus Cristo. Porque só n'Ele habita toda a plenitude da Divindade, e todas as outras plenitudes de graça, virtude e perfeição, e só n'Ele fomos abençoados com toda a bênção espiritual."},{"t":"p","x":"Ele é o nosso único Mestre que nos deve ensinar, o único Senhor de quem devemos depender, o único Chefe a quem nos devemos unir, o único Modelo ao qual nos devemos assemelhar, o único Médico que nos há de curar, o único Pastor que nos deve alimentar, o Caminho único que nos deve conduzir, a única Verdade em que devemos crer, a única Vida que nos deve animar, o único Tudo, que nos deve bastar em todas as coisas. Não nos foi dado, debaixo do Céu, outro Nome pelo qual devamos ser salvos, senão o Nome de Jesus."},{"t":"p","x":"Deus não constituiu outro fundamento da nossa salvação, perfeição e glória senão Jesus Cristo. Todo edifício que não estiver erguido sobre esta Pedra firme está construído sobre areia movediça e, mais cedo ou mais tarde, acabará, infalivelmente, por cair. Todo fiel que não estiver unido a Jesus, como o sarmento à cepa da vinha, cairá, secará, e só servirá para ser lançado ao fogo. Fora de Jesus Cristo tudo é extravio, mentira, iniquidade, inutilidade, morte e condenação. Mas, se estamos em Jesus Cristo e Jesus Cristo em nós, não há condenação a temer. Porque assim nem os Anjos do Céu, nem os homens da Terra, nem os demônios do Inferno, nem qualquer outra criatura nos pode prejudicar, pois não nos poderá separar da caridade de Deus, que está em Jesus Cristo (Rm 8, 39). Por Jesus Cristo, com Jesus Cristo, em Jesus Cristo podemos tudo: dar toda honra e glória ao Pai, na unidade do Espírito Santo, tornar-nos perfeitos e ser, para o nosso próximo, um bom odor de vida eterna."},{"t":"p","x":"Se, pois, nós estabelecermos a sólida Devoção da Santíssima Virgem, não será senão para mais perfeitamente estabelecer a de Jesus Cristo, e para dar às almas um meio fácil e seguro de encontrar Jesus Cristo. Se a Devoção à Santíssima Virgem afastasse de Jesus Cristo, deveríamos repeli-la como uma ilusão do demônio. Mas muito pelo contrário, como já o fiz ver e voltarei a mostrar mais adiante, esta Devoção é-nos indispensável para encontrar perfeitamente Jesus Cristo, para o amar ternamente e servir com fidelidade."}]},"26":{"s":"Por Santo Atanásio – Credo Atanasiano","b":[{"t":"p","x":"“É necessário para a salvação eterna crer fielmente também na Encarnação de Nosso Senhor Jesus Cristo. Porque a Fé imaculada é que creiamos e confessemos que Nosso Senhor Jesus Cristo, o Filho de Deus, é Deus e homem. É Deus, gerado na substância do Pai desde toda a eternidade; é homem porque nasceu, no tempo, da substância da Sua Mãe. Deus perfeito e homem perfeito, com alma racional e carne humana. (...) Que sofreu por nossa salvação, desceu aos infernos e ao terceiro dia ressuscitou dos mortos. Ascendeu aos Céus e está sentado à mão direita de Deus Pai Todo-Poderoso, de onde há de vir a julgar os vivos e os"},{"t":"p","x":"mortos. E quando vier, todos os homens ressuscitarão com os seus corpos, para prestar conta dos seus próprios atos. E os que tiverem praticado o bem irão para a vida eterna, e os maus para o fogo eterno.”"},{"t":"h","x":"João 3, 16-21"},{"t":"p","x":"“Porque Deus amou o mundo de tal maneira que deu o Seu Filho Unigênito, para que todo aquele que n’Ele crê não pereça, mas tenha a Vida Eterna. Porque Deus enviou o Seu Filho ao mundo, não para que condenasse o mundo, mas para que o mundo fosse salvo por Ele. Quem crê n’Ele não é condenado; mas quem não crê já está condenado, porquanto não crê no Nome do Unigênito Filho de Deus. E a condenação é esta: Que a Luz veio ao mundo, e os homens amaram mais as trevas do que a Luz, porque as suas obras eram más. Porque todo aquele que faz o mal odeia a Luz, e não vem para a Luz, para que as suas obras não sejam reprovadas. Mas quem pratica a Verdade vem para a Luz, a fim de que as suas obras sejam manifestas, porque são feitas em Deus.\""}]},"27":{"s":"Imitação de Cristo, Livro I, capítulo I","b":[{"t":"h","x":"Da imitação de Cristo e do desapego das vaidades do mundo"},{"t":"p","x":"\"Quem Me segue não anda em trevas\" (Jo 8,12). São palavras de Cristo, com as quais nos admoesta que imitemos Sua vida e costumes, se quisermos verdadeiramente ser esclarecidos e livres de toda a cegueira de coração. Seja, pois, nosso principal desempenho meditar a vida de Jesus Cristo. A Sua doutrina excede a de todos os santos; e quem possuir o seu espírito, nela achará o maná escondido. Acontece, porém, que muitos, ainda que amiúde ouçam o Evangelho, sentem nele pouco gosto e tiram pouco proveito, porque não têm o Espírito de Cristo."},{"t":"p","x":"Quem quiser compreender com satisfação e proveito as palavras de Jesus Cristo, deve conformar sua vida com a d'Ele. Que te aproveita discorrer com sabedoria sobre a Trindade, se não és humilde, e por isso Lhe desagradas? A verdade é que não são palavras sábias que fazem o homem santo ou justo, mas sim é a vida virtuosa que o faz agradável a Deus. É preferível sentir a compunção do que saber defini-la. Ainda que soubesses de cor toda a Bíblia e os ditos de todos os filósofos, que te aproveitaria tudo isto sem o amor e a graça de Deus? Vaidade das vaidades, tudo é vaidade, exceto amar a Deus e só a Ele servir (Ecl.1,2). A suma sabedoria é, pelo desprezo do mundo, caminhar para o Reino dos Céus."}]},"28":{"s":"Imitação de Cristo, Livro II, Cap XII, 1-2","b":[{"t":"p","x":"A muitos parecem duras estas palavras do Salvador: \"Renuncia a ti mesmo, toma a tua cruz e segue-Me\" (Lc 9,23). Porém, muito mais duras parecerão aquelas que Ele pronunciará no Dia do Juízo: \"Apartai-vos de Mim, malditos, ide para o fogo eterno! (Mt 25,41). Os que agora ouvem e seguem de boa vontade a palavra da Cruz, não temerão então a sentença da eterna condenação. \"Este sinal da Cruz aparecerá no céu quando o Senhor vier a julgar\" (Mt 24,30). Então todos os servos da Cruz, que se conformaram na vida com Cristo crucificado, se achegarão a Cristo Juiz com grande confiança."},{"t":"p","x":"Por que temes, pois, tomar a cruz, pela qual se vai ao Céu? Na cruz estão a salvação e a vida, na cruz a proteção contra nossos inimigos. Da cruz manam as suavidades celestiais; na cruz estão a fortaleza da alma, a alegria do coração, o compêndio da virtude, a perfeição da santidade. Não há salvação da alma, nem esperança da vida eterna, senão na cruz."},{"t":"p","x":"Toma, pois, a tua cruz, segue a Jesus e chegarás à Vida Eterna. Este Senhor foi adiante, levando às costas a Sua Cruz; e nela morreu por ti, para que tu leves também a tua, e nela desejes morrer. \"Porque se morreres com Ele, também com Ele viverás\" (Rm 6,8); e se fores Seu companheiro nos trabalhos, o serás também na Glória."}]},"29":{"s":"Tratado da Verdadeira Devoção à Santíssima Virgem","b":[{"t":"p","x":"Os que tomarem esta santa escravidão terão uma devoção especial pelo Mistério da Encarnação do Verbo, a 25 de março, que é o Mistério adequado a esta devoção, pois que esta devoção foi inspirada pelo Espírito Santo: 1° para honrar e imitar a dependência em que Deus Filho quis estar de Maria, para glória de Deus Seu Pai e para nossa salvação; dependência que transparece particularmente neste Mistério em que Jesus Cristo se torna cativo e escravo no seio de Maria Santíssima, aí dependendo d'Ela em tudo; 2° para agradecer a Deus as graças incomparáveis que concedeu a Maria, principalmente por tê-La escolhido para Sua Mãe Digníssima, escolha feita neste Mistério. São estes os dois fins principais da escravização a Jesus Cristo em Maria."},{"t":"p","x":"Os que adotarem esta escravidão terão muita devoção em rezar a Ave-Maria, ou Saudação Angélica. Poucos cristãos, embora esclarecidos, conhecem o valor, o mérito, a excelência e a necessidade desta oração. Foi preciso que a Santíssima Virgem aparecesse repetidas vezes a grandes santos muito esclarecidos, como São Domingos, São João Capistrano, o bem-aventurado Alano da Rocha, para lhes mostrar o mérito desta oração. Compuseram grossos volumes sobre as maravilhas da sua eficácia na conversão das almas. Publicaram altamente e pregaram publicamente que, tendo a salvação do mundo começando pela Ave-Maria, a salvação de cada alma em particular está ligada a esta oração."},{"t":"p","x":"Foi esta oração que fez dar à Terra seca e estéril o Fruto da Vida, e é esta mesma oração que, rezada com devoção, deve fazer germinar nas nossas almas a Palavra de Deus, e fazer brotar o fruto de vida, que é Jesus Cristo."}]},"30":{"s":"Tratado da Verdadeira Devoção à Santíssima Virgem","b":[{"t":"p","x":"Eis aqui algumas práticas interiores assaz santificantes para aqueles chamados pelo Espírito Santo a mais alta perfeição. Consiste, em quatro palavras, em fazer todas as suas ações por Maria, com Maria, em Maria e para Maria, a fim de fazê-las mais perfeitamente por Jesus, com Jesus, em Jesus e para Jesus."},{"t":"p","x":"É preciso fazer todas as ações por Maria, quer dizer, em todas as coisas obedecer à Santíssima Virgem, e em tudo conduzir-se por Seu espírito, que é o Santo Espírito de Deus. São filhos de Deus os que se conduzem pelo espírito de Deus (Rm 8, 14). E os que pautam sua conduta pelo espírito de Maria são filhos de Maria e, por conseguinte, filhos de Deus, como já demonstramos; entre tantos devotos da Santíssima Virgem, só os que se conduzem por Seu espírito é que são devotos verdadeiros e fiéis. Disse que o espírito de Maria é o Espírito de Deus, porque Ela jamais se conduziu por Seu próprio espírito, e sempre pelo Espírito de Deus, e este de tal modo a dominou que acabou tornando-se Seu próprio espírito. Quão feliz é uma alma quando, a exemplo do bom irmão jesuíta Rodríguez, falecido em odor de santidade, é toda possuída e governada pelo espírito de Maria, que é um espírito suave e forte, zeloso e prudente, humilde e corajoso, puro e fecundo!"},{"t":"p","x":"É mister fazer todas as ações com Maria, isto é, em todas as ações olhar Maria como um modelo acabado de todas as virtudes e perfeições, que o Espírito Santo formou numa pura criatura, e imitá-lo na medida de nossa capacidade. Cumpre, portanto, que, em cada ação, consideremos como Maria a fez ou faria se estivesse em nosso lugar. Devemos, por isso, examinar e meditar as grandes virtudes que Ela praticou durante a vida, especialmente 1º Sua fé viva, pela qual creu fiel e constantemente até ao pé da Cruz, sobre o Calvário; 2º Sua humildade profunda que a levou a esconder-Se, a calar-Se, a submeter-Se a tudo e a colocar-Se em último lugar. 3º A Sua Pureza toda divina, que não teve nem jamais terá igual sob o Céu. Enfim, todas as Suas demais virtudes."},{"t":"p","x":"É preciso pretender apenas, como recompensa destes pequenos serviços, a honra de pertencer a tão amável Princesa, a felicidade de sermos por Ela unidos a Jesus, Seu Filho, com um laço indissolúvel, no tempo e na eternidade."}]}};
+
+const PHASES = [
+  {id:"p0", n:"I", name:"Doze dias preliminares", short:"12 dias preliminares", days:[1,12], goal:"Esvaziar-se do espírito do mundo",
+   desc:"Examinar a consciência, rezar, renunciar à própria vontade; mortificação e pureza de coração.",
+   prayers:["veni","ave"], invoc:null},
+  {id:"p1", n:"II", name:"Primeira semana", short:"1ª semana", days:[13,18], goal:"Conhecimento de si mesmo",
+   desc:"Pedir o conhecimento de si e a contrição dos pecados, tudo em espírito de humildade, aos pés de Maria.",
+   prayers:["ave","ladES","ladNS"], invoc:"Senhor, que eu veja! · Que eu me conheça! · Vinde, Espírito Santo!"},
+  {id:"p2", n:"III", name:"Segunda semana", short:"2ª semana", days:[19,24], goal:"Conhecimento da Santíssima Virgem",
+   desc:"Pedir ao Espírito Santo o conhecimento de Maria e imitar as Suas dez virtudes principais.",
+   prayers:["ave","ladES","rosario","oMaria"], invoc:null},
+  {id:"p3", n:"IV", name:"Terceira semana", short:"3ª semana", days:[25,30], goal:"Conhecimento de Jesus Cristo",
+   desc:"Estudar Jesus Cristo, o Homem-Deus, Sua vida interior e Sua união com Maria nos mistérios.",
+   prayers:["ave","ladES","ladJesus","agostinho"], invoc:"Senhor, que eu Vos conheça! · Senhor, fazei que eu veja quem sois Vós!"},
+  {id:"p4", n:"V", name:"Dia da consagração", short:"Consagração", days:[31,31], goal:"Entrega total a Jesus por Maria",
+   desc:"Confissão, comunhão, fórmula da consagração assinada e um pequeno tributo.", prayers:["formula"], invoc:null}
+];
+const phaseOf = d => PHASES.find(p => d>=p.days[0] && d<=p.days[1]);
+
+// Livro: título e leitura sugerida (do sumário do livro); "tema" e "pergunta" são resumos para o grupo.
+const BOOK = [null,
+ ["Maria convida-nos à santidade","Mt 7,13-27","Todos são chamados à santidade, e Deus nos dá Maria como caminho seguro para alcançá-la.","Onde, no meu dia a dia, a santidade parece mais distante?"],
+ ["O mundo e o seu príncipe infernal","Mt 4,1-10","O espírito do mundo se opõe ao de Jesus; unidos a Maria, não precisamos temer o inimigo.","Que hábitos do mundo ainda ocupam o lugar de Deus na minha rotina?"],
+ ["A tríplice concupiscência","Mt 16,24-27","Concupiscência da carne, dos olhos e soberba da vida; o remédio é o desapego e o sacrifício oferecido a Deus.","Que pequeno sacrifício posso oferecer nestes dias?"],
+ ["As máximas do mundo","Mt 5,38-48","Os “mandamentos do mundo” descritos por São Luís e as idolatrias de hoje: ateísmo prático, hedonismo e materialismo.","Qual dessas idolatrias mais me tenta?"],
+ ["As máximas de Jesus Cristo (I)","Mt 5,3","As bem-aventuranças da pobreza de espírito, da mansidão e das lágrimas como caminho de Jesus.","Como viver a mansidão com quem me contraria?"],
+ ["As máximas de Jesus Cristo (II)","Mt 10,16-28","Pureza de coração, misericórdia e coragem diante das perseguições por amor de Cristo.","Onde preciso guardar melhor o meu coração?"],
+ ["Vida mundana e vida marial","Mt 13,24-34","A vida voltada às aparências, comparada com a vida escondida no Coração de Maria.","O que significa, para mim, “habitar na casa de Maria”?"],
+ ["Morte do escravo do mundo e do Escravo de Amor","Mt 24,36-51","Como vivemos é como morreremos: a morte de quem serviu ao mundo e de quem se entregou a Maria.","Se fosse hoje, eu estaria preparado?"],
+ ["Julgamento do escravo do mundo e do Escravo de Amor","Mt 25,31-46","O juízo particular, e Maria como advogada dos seus escravos de amor.","“No entardecer da vida seremos julgados sobre o amor.” Como tenho amado?"],
+ ["O Inferno","Mt 22,1-14","A realidade do inferno, a visão de Fátima e as falsas devoções a evitar: escrupulosa, presunçosa, inconstante, hipócrita e interesseira.","Minha devoção a Maria tem sido constante ou interesseira?"],
+ ["O Paraíso","Lc 12,32-38","O céu como posse de Deus, e as marcas da verdadeira devoção: interior, terna, santa, constante e desinteressada.","Qual dessas marcas mais falta em mim?"],
+ ["As promessas do Batismo","Mt 25,1-13","A consagração é a renovação consciente e madura das promessas do Batismo.","Conheço a data do meu Batismo? O que foi prometido naquele dia?"],
+ ["O pecado na nossa vida espiritual","Mt 3,1-12","O pecado original e os pecados atuais; a humildade como ponto de partida.","Que pecado mais se repete na minha vida?"],
+ ["Nossos maus hábitos","Mt 16,5-12","As feridas da inteligência e da vontade; Maria, a Escrava do Senhor, como remédio contra o orgulho.","Em que situação eu insisto em impor a minha opinião?"],
+ ["Consequências dos nossos maus hábitos","Jo 13,21-35","O orgulho nos faz esquecer Deus e o próximo; Maria ensina o esquecimento de si e a coragem cristã.","A quem tenho deixado de servir por estar centrado em mim?"],
+ ["O abismo do nosso nada","Jo 5,2-9","Sem Deus somos nada; é “na cela do autoconhecimento” que se adquire a perfeição.","Em que eu confio mais em mim do que em Deus?"],
+ ["A nossa impossibilidade na vida sobrenatural","Mt 25,14-30","Dependemos inteiramente da graça; comparamo-nos com Maria a partir das palavras da Ave-Maria.","Peço com frequência a graça da perseverança?"],
+ ["Necessidade de mediadores","Jo 8,12-20","Jesus é o único Mediador de redenção; Maria é a medianeira de intercessão que Ele nos deu.","Recorro a Maria nas dificuldades, ou só depois de esgotar as minhas forças?"],
+ ["Grandeza oculta de Maria","Pr 8,22-33","Maria quis viver escondida, conhecida só de Deus; a humildade é o fundamento das outras virtudes.","Faço o bem buscando ser visto?"],
+ ["Maria e a Santíssima Trindade","Lc 1,26-38","Filha do Pai, Mãe do Filho e Esposa do Espírito Santo: Maria é santuário da Trindade.","Como o Espírito Santo pode formar Jesus em mim, por meio de Maria?"],
+ ["Glórias de Maria","Mt 1,18-25","Os quatro dogmas marianos: Imaculada Conceição, Maternidade Divina, Virgindade Perpétua e Assunção.","Qual desses mistérios mais me toca, e por quê?"],
+ ["Maria e nós, os seus filhos","Lc 1,39-56","Nova Eva, Maria é nossa Mãe na ordem da graça e escudo contra o inimigo.","Trato Maria como Mãe de verdade?"],
+ ["Ofícios de Maria aos seus devotos","At 1,12-14; 2,1-4","Maria alimenta, guia, protege e intercede pelos seus devotos, e os conduz à Eucaristia.","Como Maria tem me levado aos sacramentos?"],
+ ["Maria, a Árvore da vida","Mt 7,16-20","Maria é a Árvore da Vida cujo fruto é Jesus; vigilância e mortificação para cultivá-La na alma.","O que preciso “podar” para que essa árvore cresça em mim?"],
+ ["Jesus no seio de Maria","Jo 1,1-14","No seio de Maria o Verbo se fez carne: Jesus vive em Maria e Maria vive em Jesus.","O que a Encarnação me ensina sobre depender de Maria?"],
+ ["Jesus nos braços de Maria","Lc 2,1-20","Nos braços de Maria Jesus recebe pastores e reis; pelas mãos d’Ela nossas ofertas agradam a Deus.","Que boas obras posso entregar hoje nas mãos de Maria?"],
+ ["Jesus na casa de Maria","Lc 2,39-52","Em Nazaré Jesus viveu submisso a Maria; também nós crescemos na vida oculta sob o Seu olhar.","Como viver a vida escondida na minha família e no trabalho?"],
+ ["Jesus e Maria nas Bodas em Caná","Jo 2,1-11","“Fazei tudo o que Ele vos disser” e a prática interior: tudo por, com, em e para Maria.","Qual dessas quatro práticas posso começar amanhã?"],
+ ["Jesus e Maria no Calvário","Jo 19,25-27","Maria ao pé da Cruz nos ensina a sabedoria da Cruz e o espírito de reparação.","Que cruz preciso aceitar com mais paz?"],
+ ["Bondade e doçura da Sabedoria Encarnada","Lc 22,7-20","A doçura de Jesus, Cordeiro de Deus, que permanece conosco na Eucaristia; a consagração é caminho fácil, curto, seguro e perfeito.","Estou pronto para me entregar inteiramente?"],
+ ["Dia da Consagração","Lc 24,13-35","Entregamos a Maria o corpo, a alma, os bens exteriores e os interiores, até o valor das boas obras passadas, presentes e futuras.","O que ainda reservo para mim?"]
+];
+
+const L = s => s.trim().split("\n").map(x=>x.trim()).filter(Boolean);
+const PRAYERS = {
+ veni:{name:"Veni Creator", sub:"Vinde, Espírito Criador", stanzas:[
+  "Oh vinde, Espírito Criador,\nas nossas almas visitai\ne enchei os nossos corações\ncom Vossos dons celestiais.",
+  "Vós sois chamado o Intercessor,\ndo Deus excelso o dom sem par,\na fonte viva, o fogo, o amor,\na unção divina e salutar.",
+  "Sois doador dos sete dons,\ne sois poder na mão do Pai,\npor Ele prometido a nós,\npor nós Seus feitos proclamais.",
+  "A nossa mente iluminai,\nos corações enchei de amor,\nnossa fraqueza encorajai,\nqual força eterna e protetor.",
+  "Nosso inimigo repeli,\ne concedei-nos Vossa paz;\nse pela graça nos guiais,\no mal deixamos para trás.",
+  "Ao Pai e ao Filho Salvador\npor Vós possamos conhecer.\nQue procedeis do Seu amor\nfazei-nos sempre firmes crer. Amém."],
+  after:["V. Enviai, Senhor, o Vosso Espírito, e tudo será criado.\nR. E renovareis a face da Terra.","Oremos: Deus, que instruístes os corações dos Vossos fiéis com a luz do Espírito Santo, fazei que apreciemos retamente todas as coisas segundo o mesmo Espírito e gozemos sempre da Sua consolação. Por Cristo, nosso Senhor. Amém."]},
+ ave:{name:"Ave Maris Stella", sub:"Ave, do mar Estrela", stanzas:[
+  "Ave, do mar Estrela,\nbendita Mãe de Deus,\nfecunda e sempre Virgem,\nportal feliz dos Céus.",
+  "Ouvindo aquele Ave\ndo Anjo Gabriel,\nmudando de Eva o nome,\ntrazei-nos paz do Céu.",
+  "Ao cego iluminai,\nao réu livrai também;\nde todo mal guardai-nos\ne dai-nos todo o bem.",
+  "Mostrai ser nossa Mãe,\nlevando a nossa voz\na Quem, por nós nascido,\ndignou-se vir de Vós.",
+  "Suave mais que todas,\nó Virgem sem igual,\nfazei-nos mansos, puros,\nguardai-nos contra o mal.",
+  "Oh! dai-nos vida pura,\nguiai-nos para a luz,\ne um dia, ao Vosso lado,\npossamos ver Jesus.",
+  "Louvor a Deus, o Pai,\ne ao Filho, Sumo Bem,\ncom Seu Divino Espírito\nagora e sempre. Amém."]},
+ ladES:{name:"Ladainha do Espírito Santo", lines:L(`
+Senhor, tende piedade de nós.
+Jesus Cristo, tende piedade de nós.
+Senhor, tende piedade de nós.
+Divino Espírito Santo, ouvi-nos.
+Espírito Paráclito, atendei-nos.
+Deus Pai dos Céus, |tende piedade de nós.
+Deus Filho, Redentor do mundo, |tende piedade de nós.
+Deus Espírito Santo, |tende piedade de nós.
+Santíssima Trindade, que sois um só Deus, |tende piedade de nós.
+Espírito da Verdade, |tende piedade de nós.
+Espírito da Sabedoria, |tende piedade de nós.
+Espírito da inteligência, |tende piedade de nós.
+Espírito da fortaleza, |tende piedade de nós.
+Espírito da piedade, |tende piedade de nós.
+Espírito do bom conselho, |tende piedade de nós.
+Espírito da ciência, |tende piedade de nós.
+Espírito do santo temor, |tende piedade de nós.
+Espírito da Caridade, |tende piedade de nós.
+Espírito da alegria, |tende piedade de nós.
+Espírito da paz, |tende piedade de nós.
+Espírito das virtudes, |tende piedade de nós.
+Espírito de toda a graça, |tende piedade de nós.
+Espírito da adoção dos filhos de Deus, |tende piedade de nós.
+Purificador das nossas almas, |tende piedade de nós.
+Santificador e guia da Igreja Católica, |tende piedade de nós.
+Distribuidor dos dons celestes, |tende piedade de nós.
+Conhecedor dos pensamentos e das intenções do coração, |tende piedade de nós.
+Doçura dos que começam a Vos servir, |tende piedade de nós.
+Coroa dos perfeitos, |tende piedade de nós.
+Alegria dos Anjos, |tende piedade de nós.
+Luz dos Patriarcas, |tende piedade de nós.
+Inspiração dos Profetas, |tende piedade de nós.
+Palavra e sabedoria dos Apóstolos, |tende piedade de nós.
+Vitória dos Mártires, |tende piedade de nós.
+Ciência dos Confessores, |tende piedade de nós.
+Pureza das Virgens, |tende piedade de nós.
+Unção de todos os Santos, |tende piedade de nós.
+Sede-nos propício, |perdoai-nos, Senhor.
+Sede-nos propício, |atendei-nos, Senhor.
+De todo o pecado, |livrai-nos, Senhor.
+De todas as tentações e ciladas do demônio, |livrai-nos, Senhor.
+De toda a presunção e desesperação, |livrai-nos, Senhor.
+Do ataque à Verdade conhecida, |livrai-nos, Senhor.
+Da inveja da graça fraterna, |livrai-nos, Senhor.
+De toda a obstinação e impenitência, |livrai-nos, Senhor.
+De toda a negligência e torpor do espírito, |livrai-nos, Senhor.
+De toda a impureza da mente e do corpo, |livrai-nos, Senhor.
+De todas as heresias e erros, |livrai-nos, Senhor.
+De todo o mau espírito, |livrai-nos, Senhor.
+Da morte má e eterna, |livrai-nos, Senhor.
+Pela Vossa eterna procedência do Pai e do Filho, |livrai-nos, Senhor.
+Pela milagrosa conceição do Filho de Deus, |livrai-nos, Senhor.
+Pela Vossa descida sobre Jesus Cristo batizado, |livrai-nos, Senhor.
+Pela Vossa santa aparição na Transfiguração do Senhor, |livrai-nos, Senhor.
+Pela Vossa vinda sobre os discípulos do Senhor, |livrai-nos, Senhor.
+No Dia do Juízo, |livrai-nos, Senhor.
+Ainda que pecadores, |nós Vos rogamos, ouvi-nos.
+Para que nos perdoeis, |nós Vos rogamos, ouvi-nos.
+Para que Vos digneis vivificar e santificar todos os membros da Igreja, |nós Vos rogamos, ouvi-nos.
+Para que Vos digneis conceder-nos o dom da verdadeira piedade, devoção e oração, |nós Vos rogamos, ouvi-nos.
+Para que Vos digneis inspirar-nos sinceros afetos de misericórdia e de caridade, |nós Vos rogamos, ouvi-nos.
+Para que Vos digneis criar em nós um espírito novo e um coração puro, |nós Vos rogamos, ouvi-nos.
+Para que Vos digneis conceder-nos verdadeira paz e tranquilidade do coração, |nós Vos rogamos, ouvi-nos.
+Para que Vos digneis fazer-nos dignos e fortes para suportar as perseguições pela justiça, |nós Vos rogamos, ouvi-nos.
+Para que Vos digneis confirmar-nos em Vossa graça, |nós Vos rogamos, ouvi-nos.
+Para que Vos digneis receber-nos no número dos Vossos eleitos, |nós Vos rogamos, ouvi-nos.
+Para que Vos digneis ouvir-nos, |nós Vos rogamos, ouvi-nos.
+Espírito de Deus, |nós Vos rogamos, ouvi-nos.
+Cordeiro de Deus, que tirais o pecado do mundo, |enviai-nos o Espírito Santo.
+Cordeiro de Deus, que tirais o pecado do mundo, |mandai-nos o Espírito prometido do Pai.
+Cordeiro de Deus, que tirais o pecado do mundo, |dai-nos o Espírito Bom.
+Espírito Santo, ouvi-nos.
+Espírito Consolador, atendei-nos.`),
+  after:["V. Enviai o Vosso Espírito e tudo será criado.\nR. E renovareis a face da Terra.","Oremos: Ó Deus, que instruístes os corações dos Vossos fiéis com a luz do Espírito Santo, fazei que apreciemos retamente todas as coisas segundo o mesmo Espírito e gozemos sempre da Sua consolação. Por Cristo, Nosso Senhor. Amém."]},
+ ladNS:{name:"Ladainha de Nossa Senhora", sub:"Ladainha Lauretana", lines:L(`
+Senhor, tende piedade de nós.
+Jesus Cristo, tende piedade de nós.
+Senhor, tende piedade de nós.
+Jesus Cristo, ouvi-nos.
+Jesus Cristo, atendei-nos.
+Pai Celeste, que sois Deus, |tende piedade de nós.
+Filho, Redentor do mundo, que sois Deus, |tende piedade de nós.
+Espírito Santo, que sois Deus, |tende piedade de nós.
+Santíssima Trindade, que sois um só Deus, |tende piedade de nós.
+Santa Maria, |rogai por nós.
+Santa Mãe de Deus, |rogai por nós.
+Santa Virgem das virgens, |rogai por nós.
+Mãe de Jesus Cristo, |rogai por nós.
+Mãe da Divina Graça, |rogai por nós.
+Mãe puríssima, |rogai por nós.
+Mãe castíssima, |rogai por nós.
+Mãe Imaculada, |rogai por nós.
+Mãe intacta, |rogai por nós.
+Mãe amável, |rogai por nós.
+Mãe admirável, |rogai por nós.
+Mãe do bom conselho, |rogai por nós.
+Mãe do Criador, |rogai por nós.
+Mãe do Salvador, |rogai por nós.
+Mãe da Igreja, |rogai por nós.
+Virgem prudentíssima, |rogai por nós.
+Virgem venerável, |rogai por nós.
+Virgem louvável, |rogai por nós.
+Virgem poderosa, |rogai por nós.
+Virgem clemente, |rogai por nós.
+Virgem fiel, |rogai por nós.
+Espelho de justiça, |rogai por nós.
+Sede da Sabedoria, |rogai por nós.
+Causa da nossa alegria, |rogai por nós.
+Vaso espiritual, |rogai por nós.
+Vaso honorífico, |rogai por nós.
+Vaso insigne de devoção, |rogai por nós.
+Rosa mística, |rogai por nós.
+Torre de Davi, |rogai por nós.
+Torre de marfim, |rogai por nós.
+Casa de ouro, |rogai por nós.
+Arca da aliança, |rogai por nós.
+Porta do Céu, |rogai por nós.
+Estrela da manhã, |rogai por nós.
+Saúde dos enfermos, |rogai por nós.
+Refúgio dos pecadores, |rogai por nós.
+Consoladora dos aflitos, |rogai por nós.
+Auxílio dos cristãos, |rogai por nós.
+Rainha dos Anjos, |rogai por nós.
+Rainha dos patriarcas, |rogai por nós.
+Rainha dos profetas, |rogai por nós.
+Rainha dos Apóstolos, |rogai por nós.
+Rainha dos mártires, |rogai por nós.
+Rainha dos confessores, |rogai por nós.
+Rainha das virgens, |rogai por nós.
+Rainha de todos os santos, |rogai por nós.
+Rainha concebida sem pecado original, |rogai por nós.
+Rainha assunta ao Céu, |rogai por nós.
+Rainha do sacratíssimo Rosário, |rogai por nós.
+Rainha da Paz, |rogai por nós.
+Cordeiro de Deus, que tirais os pecados do mundo, |perdoai-nos, Senhor.
+Cordeiro de Deus, que tirais os pecados do mundo, |ouvi-nos, Senhor.
+Cordeiro de Deus, que tirais os pecados do mundo, |tende piedade de nós.`),
+  after:["V. Rogai por nós, santa Mãe de Deus.\nR. Para que sejamos dignos das promessas de Cristo.","Oremos: Senhor Deus, nós Vos suplicamos que concedais aos Vossos servos perpétua saúde de alma e de corpo; e que, pela gloriosa intercessão da Bem-Aventurada sempre Virgem Maria, sejamos livres da presente tristeza e gozemos da eterna alegria. Por Cristo Nosso Senhor. Amém."]},
+ rosario:{name:"Santo Rosário", sub:"todos os dias da 2ª semana", paras:[
+  "Na segunda semana São Luís pede que se acrescente um Rosário por dia, pedindo a graça do conhecimento da Virgem Maria.",
+  "O Rosário é composto por 150 Ave-Marias contemplando os Mistérios Gozosos, Dolorosos e Gloriosos da vida de Jesus. Cada mistério: um Pai-Nosso, dez Ave-Marias e um Glória."],
+  groups:[["Mistérios Gozosos",["A Anunciação do Anjo a Maria","A Visitação de Maria a Santa Isabel","O Nascimento de Jesus em Belém","A Apresentação do Menino Jesus no Templo","A perda e o encontro de Jesus no Templo"]],
+          ["Mistérios Dolorosos",["A agonia de Jesus no Horto","A flagelação","A coroação de espinhos","Jesus carrega a Cruz até o Calvário","A crucifixão e morte de Jesus"]],
+          ["Mistérios Gloriosos",["A Ressurreição","A Ascensão","A vinda do Espírito Santo","A Assunção de Maria ao Céu","A coroação de Maria como Rainha do Céu e da Terra"]]]},
+ oMaria:{name:"Oração a Maria", sub:"de São Luís de Montfort", paras:[
+  "Ave, Maria, Filha bem-amada do Pai eterno; ave, Maria, Mãe admirável do Filho; ave, Maria, Esposa fidelíssima do Espírito Santo; ave, Maria, minha querida Mãe, minha amável Senhora e poderosa soberana; ave, minha alegria, minha glória, meu coração e minha alma! Vós me pertenceis toda por misericórdia, e eu vos pertenço todo por justiça; mas não vos pertenço bastante ainda; de novo me dou a vós todo inteiro, na qualidade de escravo perpétuo, sem nada reservar para mim ou para outrem.",
+  "Se vedes em mim qualquer coisa que não vos pertença, eu vos suplico de tirá-la agora, e de vos tornar Senhora absoluta de tudo o que possuo; de destruir e desarraigar e aniquilar tudo o que desagrada a Deus; e de plantar tudo e promover e operar tudo o que vos agradar.",
+  "Que a luz de vossa fé dissipe as trevas de meu espírito; que vossa humildade profunda tome o lugar de meu orgulho; que vossa contemplação sublime suste as distrações de minha imaginação vagabunda; que a vossa vista contínua de Deus encha a minha memória de sua presença; que o incêndio de vosso coração dilate e abrase a tibieza e frieza do meu; que vossas virtudes substituam os meus pecados; que vossos méritos sejam o meu ornamento e suplemento perante Deus.",
+  "Enfim, mui querida e bem-amada Mãe, fazei, se possível for, que não tenha outro espírito senão o vosso, para conhecer Jesus Cristo e suas divinas vontades; que não tenha outra alma senão a vossa, para louvar e glorificar o Senhor; que não tenha outro coração senão o vosso, para amar a Deus com um amor puro e ardente como vós.",
+  "Não vos peço visões ou revelações ou gozos ou mesmo prazeres, nem mesmo espirituais. É privilégio vosso ver claramente, sem trevas; gozar plenamente, sem amargor; triunfar gloriosamente à direita de vosso Filho, no céu, sem humilhação alguma; dominar absolutamente sobre os anjos, os homens e os demônios, sem resistência, e, enfim, de dispor de todos os bens de Deus, sem restrição alguma.",
+  "Eis, divina Maria, a ótima parte que o Senhor vos deu e que não vos será tirada; e isto me deleita sobremaneira. Por minha parte, não quero nesta terra senão o que vós tivestes, a saber: crer puramente, sem nada gozar ou ver; sofrer alegremente, sem consolação de criaturas; morrer continuamente a mim mesmo, sem relaxamento; e trabalhar resolutamente, até à morte, por vós, sem interesse algum, como o mais vil dos escravos.",
+  "A única graça que vos peço, por pura misericórdia, é que, a todos os dias e momentos de minha vida, eu diga três vezes amém: Assim seja, a tudo que fizestes na terra, enquanto nela vivestes. Assim seja, a tudo que fazeis agora no céu. Assim seja, a tudo que operais em minha alma, a fim de que nela só vós estejais para glorificar plenamente a Jesus em mim, no tempo e na eternidade. Assim seja."]},
+ ladJesus:{name:"Ladainha do Santíssimo Nome de Jesus", lines:L(`
+Senhor, tende piedade de nós.
+Jesus Cristo, tende piedade de nós.
+Senhor, tende piedade de nós.
+Jesus Cristo, ouvi-nos.
+Jesus Cristo, atendei-nos.
+Pai celeste, que sois Deus, |tende piedade de nós.
+Filho, Redentor do mundo, que sois Deus, |tende piedade de nós.
+Espírito Santo, que sois Deus, |tende piedade de nós.
+Santíssima Trindade, que sois um só Deus, |tende piedade de nós.
+Jesus, Filho de Deus vivo, |tende piedade de nós.
+Jesus, esplendor do Pai, |tende piedade de nós.
+Jesus, pureza da Luz eterna, |tende piedade de nós.
+Jesus, Rei da glória, |tende piedade de nós.
+Jesus, Sol da justiça, |tende piedade de nós.
+Jesus, Filho da Virgem Maria, |tende piedade de nós.
+Jesus amável, |tende piedade de nós.
+Jesus admirável, |tende piedade de nós.
+Jesus, Deus forte, |tende piedade de nós.
+Jesus, Pai do futuro século, |tende piedade de nós.
+Jesus, Anjo do grande conselho, |tende piedade de nós.
+Jesus poderosíssimo, |tende piedade de nós.
+Jesus pacientíssimo, |tende piedade de nós.
+Jesus obedientíssimo, |tende piedade de nós.
+Jesus, brando e humilde de Coração, |tende piedade de nós.
+Jesus, amante da castidade, |tende piedade de nós.
+Jesus, amador nosso, |tende piedade de nós.
+Jesus, Deus da paz, |tende piedade de nós.
+Jesus, autor da vida, |tende piedade de nós.
+Jesus, exemplar das virtudes, |tende piedade de nós.
+Jesus, zelador das almas, |tende piedade de nós.
+Jesus, nosso Deus, |tende piedade de nós.
+Jesus, nosso refúgio, |tende piedade de nós.
+Jesus, Pai dos pobres, |tende piedade de nós.
+Jesus, tesouro dos fiéis, |tende piedade de nós.
+Jesus, Bom Pastor, |tende piedade de nós.
+Jesus, Luz verdadeira, |tende piedade de nós.
+Jesus, Sabedoria eterna, |tende piedade de nós.
+Jesus, bondade infinita, |tende piedade de nós.
+Jesus, nosso caminho e nossa vida, |tende piedade de nós.
+Jesus, alegria dos Anjos, |tende piedade de nós.
+Jesus, Rei dos Patriarcas, |tende piedade de nós.
+Jesus, Mestre dos Apóstolos, |tende piedade de nós.
+Jesus, Doutor dos Evangelistas, |tende piedade de nós.
+Jesus, fortaleza dos Mártires, |tende piedade de nós.
+Jesus, luz dos Confessores, |tende piedade de nós.
+Jesus, pureza das Virgens, |tende piedade de nós.
+Jesus, coroa de todos os Santos, |tende piedade de nós.
+Sede-nos propício, |perdoai-nos, Jesus.
+Sede-nos propício, |ouvi-nos, Jesus.
+De todo o mal, |livrai-nos, Jesus.
+De todo o pecado, |livrai-nos, Jesus.
+De Vossa ira, |livrai-nos, Jesus.
+Das ciladas do demônio, |livrai-nos, Jesus.
+Do espírito da impureza, |livrai-nos, Jesus.
+Da morte eterna, |livrai-nos, Jesus.
+Do desprezo das Vossas inspirações, |livrai-nos, Jesus.
+Pelo mistério da Vossa santa Encarnação, |livrai-nos, Jesus.
+Pela Vossa Natividade, |livrai-nos, Jesus.
+Pela Vossa Infância, |livrai-nos, Jesus.
+Pela Vossa santíssima Vida, |livrai-nos, Jesus.
+Pelos Vossos trabalhos, |livrai-nos, Jesus.
+Pela Vossa Agonia e Paixão, |livrai-nos, Jesus.
+Pela Vossa Cruz e desamparo, |livrai-nos, Jesus.
+Pelas Vossas angústias, |livrai-nos, Jesus.
+Pela Vossa Morte e sepultura, |livrai-nos, Jesus.
+Pela Vossa Ressurreição, |livrai-nos, Jesus.
+Pela Vossa Ascensão, |livrai-nos, Jesus.
+Pela Vossa instituição da Santíssima Eucaristia, |livrai-nos, Jesus.
+Pelas Vossas alegrias, |livrai-nos, Jesus.
+Pela Vossa Glória, |livrai-nos, Jesus.
+Cordeiro de Deus, que tirais os pecados do mundo, |perdoai-nos, Jesus.
+Cordeiro de Deus, que tirais os pecados do mundo, |ouvi-nos, Jesus.
+Cordeiro de Deus, que tirais os pecados do mundo, |tende piedade de nós, Jesus.
+Jesus, ouvi-nos.
+Jesus, atendei-nos.`),
+  after:["Oremos: Senhor Jesus Cristo, que dissestes: Pedi e recebereis; buscai e achareis; batei e abrir-se-vos-á, nós Vos suplicamos que concedais a nós que Vo-lo pedimos os sentimentos afetivos de Vosso divino amor, a fim de que nós Vos amemos de todo o coração e que esse amor transpareça em nossas ações, sem que deixemos de Vos amar. Permiti que tenhamos sempre, Senhor, um igual temor e amor pelo Vosso Santo Nome; pois não deixais de governar aqueles que estabeleceis na firmeza do Vosso amor. Vós que viveis e reinais pelos séculos dos séculos. Amém."]},
+ agostinho:{name:"Oração de Santo Agostinho", sub:"Oração a Jesus", paras:[
+  "Ó meu Jesus, Vós sois o Cristo, meu Pai Santo, meu Deus misericordioso, meu Rei infinitamente grande. Vós sois o meu Bom Pastor, meu único Mestre, meu Auxílio todo bondade, meu Bem-amado de arrebatadora beleza, meu Pão da Vida, meu Sacerdote Eterno. Vós sois o meu Guia para a Pátria, minha Luz verdadeira, minha doçura toda santa, meu Caminho direto.",
+  "Vós sois a minha Sabedoria sublime, minha simplicidade pura, minha pacífica concórdia. Vós sois toda a minha defesa, minha preciosa herança, minha eterna Salvação. Ó Jesus Cristo, Mestre adorável, por que é que eu amei ou desejei em toda a minha vida outra coisa fora de Vós, Jesus, meu Deus?!",
+  "Onde estava eu quando não pensava em Vós?! Que o meu coração, ao menos a partir deste momento, só arda em desejos de Vós, Senhor Jesus; que só para Vos amar ele se dilate. Desejos da minha alma, correi doravante: já basta de delongas! Apressai-vos a atingir o fim porque aspirais, buscai em verdade Aquele que procurais!",
+  "Ó Jesus, seja anátema quem não Vos amar! Seja repleto de amargura! Ó doce Jesus, sede o amor, as delícias e o objeto da admiração de todo coração dignamente consagrado à Vossa glória. Deus do meu coração e minha herança, divino Jesus, que o meu coração esvazie-se do seu próprio espírito, para que Vós possais viver em mim, acendendo em minha alma a brasa ardente do Vosso Amor, que seja o princípio de um incêndio todo divino.",
+  "Arda incessantemente sobre o altar do meu coração, inflame o mais íntimo do meu ser, e abrase as profundezas da minha alma. Que no dia da minha morte eu compareça diante de Vós todo consumido no Vosso Amor! Amém. Assim seja."]},
+ formula:{name:"Fórmula da consagração", sub:"no dia 31", link:true}
+};
+const PR_ORDER = ["veni","ave","ladES","ladNS","rosario","oMaria","ladJesus","agostinho"];
+
+const FORMULA = [
+ "Ó SABEDORIA ETERNA E ENCARNADA! Ó Amabilíssimo e adorável Jesus, verdadeiro Deus e verdadeiro homem, Filho Unigênito do Pai Eterno e da sempre Virgem Maria. Adoro-Vos profundamente, no seio e nos esplendores do Vosso Pai, durante toda a eternidade, e no seio virginal de Maria, Vossa Mãe digníssima, no tempo da Vossa Encarnação.",
+ "Dou-Vos graças por Vos terdes aniquilado a Vós mesmo, tomando a forma de escravo, para livrar-me da cruel escravidão do demônio. Eu Vos louvo e glorifico por Vos terdes querido submeter em tudo a Maria, Vossa Mãe Santíssima, a fim de, por Ela, tornar-me Vosso fiel escravo. Entretanto, ai de mim, criatura ingrata e infiel! Não guardei os votos e promessas que tão solenemente Vos fiz no meu Batismo. Não cumpri as minhas obrigações; não mereço ser chamado Vosso filho, nem Vosso escravo; e, como nada há em mim que não mereça a Vossa repulsa e a Vossa cólera, não ouso aproximar-me por mim mesmo da Vossa Santíssima e Augustíssima Majestade.",
+ "Recorro, pois, à intercessão e à misericórdia de Vossa Mãe Santíssima, que me destes por medianeira junto de Vós. É por intermédio d’Ela que espero obter de Vós a contrição e o perdão dos meus pecados, a aquisição e conservação da Sabedoria. Ave, pois, ó Maria Imaculada, Tabernáculo Vivo da Divindade, onde a Eterna Sabedoria escondida quer ser adorada pelos Anjos e pelos homens. Ave, ó Rainha do Céu e da Terra, a cujo Império é submetido tudo o que há abaixo de Deus. Ave, ó Seguro Refúgio dos pecadores, cuja misericórdia a ninguém despreza. Atendei ao desejo que tenho da Divina Sabedoria, e recebei, para isso, os votos e ofertas apresentados pela minha baixeza.",
+ "Eu, {NOME}, infiel pecador, renovo e ratifico hoje, nas Vossas mãos, as promessas do meu Batismo: renuncio para sempre a Satanás, às suas pompas e suas obras, e dou-me inteiramente a Jesus Cristo, a Sabedoria Encarnada, para O seguir, levando a minha Cruz, todos os dias da minha vida. E para Lhe ser mais fiel do que até agora tenho sido, escolho-Vos hoje, ó Maria, na presença de toda a Corte Celeste, por minha Mãe e Senhora.",
+ "Entrego-Vos e consagro-Vos, na qualidade de escravo, o meu corpo e a minha alma, os meus bens interiores e exteriores, e o próprio valor das minhas boas obras passadas, presentes e futuras, deixando-Vos pleno e inteiro direito de dispor de mim e de tudo o que me pertence, sem exceção alguma, segundo o Vosso agrado e para maior glória de Deus, no tempo e na eternidade.",
+ "Recebei, ó Benigníssima Virgem, esta pequenina oferta da minha escravidão, em união e em honra à submissão que a Sabedoria Eterna quis ter à Vossa Maternidade; em homenagem ao poder que ambos tendes sobre este vermezinho e miserável pecador; em ação de graças pelos privilégios com que largamente Vos favoreceu a Trindade Santíssima. Protesto que quero, de hoje em diante e firmemente, como Vosso verdadeiro escravo, buscar a Vossa honra e obedecer-Vos em todas as coisas.",
+ "Ó Mãe Admirável, apresentai-me ao Vosso amado Filho na condição de escravo perpétuo, a fim de que, tendo-me resgatado por Vós, por Vós também me receba propiciamente. Ó Mãe de Misericórdia, concedei-me a graça de obter a Verdadeira Sabedoria de Deus, e de colocar-me, para isso, entre o número daqueles que amais, ensinais, guiais, sustentais e protegeis como filhos e escravos Vossos. Ó Virgem Fiel, tornai-me em tudo um tão perfeito discípulo, imitador e escravo da Sabedoria Encarnada, Jesus Cristo, Vosso Filho, que eu chegue um dia, por Vossa intercessão e a Vosso exemplo, à plenitude da Sua idade na Terra e da Sua glória no Céu. Amém. Assim seja."
+];
+
+const FEASTS = [
+ [2,2,"Purificação de Nossa Senhora"],[2,11,"Nossa Senhora de Lourdes"],[3,25,"Anunciação do Senhor"],[4,26,"Nossa Senhora do Bom Conselho"],
+ [5,13,"Nossa Senhora de Fátima"],[5,24,"Nossa Senhora Auxiliadora"],[7,16,"Nossa Senhora do Carmo"],[8,15,"Assunção de Nossa Senhora"],
+ [9,15,"Nossa Senhora das Dores"],[9,19,"Nossa Senhora de La Salette"],[10,7,"Nossa Senhora do Rosário"],[10,12,"Nossa Senhora Aparecida"],
+ [11,21,"Apresentação de Nossa Senhora"],[11,27,"Nossa Senhora das Graças"],[12,8,"Imaculada Conceição"],[12,12,"Nossa Senhora de Guadalupe"]
+];
+
+/* ---------- estado ---------- */
+const KEY = "totus-tuus-v1";
+let state = {date:null, name:"", done:{}, notes:{}};
+try { const s = JSON.parse(localStorage.getItem(KEY)||"null"); if (s) state = Object.assign(state, s); } catch(e){}
+if (!state.notes) state.notes = {};
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} };
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const MONTHS = ["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
+const DOW = ["dom","seg","ter","qua","qui","sex","sáb"];
+const dayMs = 86400000;
+const parse = iso => { const [y,m,d] = iso.split("-").map(Number); return new Date(y, m-1, d); };
+const iso = dt => `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,"0")}-${String(dt.getDate()).padStart(2,"0")}`;
+const fmt = (dt, long) => long ? `${DOW[dt.getDay()]}, ${dt.getDate()} ${MONTHS[dt.getMonth()]} ${dt.getFullYear()}` : `${dt.getDate()} ${MONTHS[dt.getMonth()]}`;
+const addDays = (dt, n) => new Date(dt.getFullYear(), dt.getMonth(), dt.getDate()+n);
+const today0 = () => { const t = new Date(); return new Date(t.getFullYear(), t.getMonth(), t.getDate()); };
+const startOf = consIso => addDays(parse(consIso), -30);
+const dateOfDay = d => state.date ? addDays(startOf(state.date), d-1) : null;
+const currentDay = () => { if (!state.date) return null; const n = Math.round((today0() - startOf(state.date))/dayMs) + 1; return n; };
+
+const CHECKS = ["Rezei as orações do período","Li a meditação da apostila","Li a meditação e a leitura do livro","Fiz o exame / partilhei no grupo"];
+const isDone = d => (state.done[d]||[]).filter(Boolean).length === CHECKS.length;
+
+/* ---------- topo ---------- */
+function renderToday(){
+  const box = $("#todayBox"); const n = currentDay();
+  if (!state.date){ box.innerHTML = `<span class="label" style="color:#e4c77d">Sua preparação</span><b>Escolha a data</b><small>Defina a festa da consagração para o site marcar o dia de hoje.</small><br><button data-go="inicio-cal">Escolher data</button>`; return; }
+  const cons = parse(state.date);
+  if (n < 1){ box.innerHTML = `<span class="label" style="color:#e4c77d">Começa em ${1-n} dia${1-n>1?"s":""}</span><b>${fmt(startOf(state.date),true)}</b><small>Consagração em ${fmt(cons,true)}</small><br><button data-day="1">Ver o 1º dia</button>`; return; }
+  if (n > 31){ box.innerHTML = `<span class="label" style="color:#e4c77d">Consagração feita</span><b>${fmt(cons,true)}</b><small>Renove-a todos os anos nesta data.</small><br><button data-go="consagracao">Ver a fórmula</button>`; return; }
+  const p = phaseOf(n);
+  box.innerHTML = `<span class="label" style="color:#e4c77d">Hoje · ${esc(p.short)}</span><b>${n}º dia de 31</b><small>${esc(BOOK[n][0])}</small><br><button data-day="${n}">Abrir o dia de hoje</button>`;
+}
+
+/* ---------- início ---------- */
+function renderInicio(){
+  $("#timeline").innerHTML = PHASES.map(p => {
+    const len = p.days[1]-p.days[0]+1;
+    return `<button class="seg ${p.id==='p4'?'last':''}" style="flex:${p.id==='p4'?4.5:len}" data-day="${p.days[0]}"><span class="n">${p.n} · ${p.days[0]===p.days[1]?`dia ${p.days[0]}`:`dias ${p.days[0]}–${p.days[1]}`}</span><strong>${esc(p.short)}</strong><span class="d">${esc(p.goal)}</span></button>`;
+  }).join("");
+  $("#phases").innerHTML = PHASES.slice(0,4).map(p => `<div class="phase"><div class="label">${p.n} · dias ${p.days[0]}–${p.days[1]}</div><h3>${esc(p.goal)}</h3><p>${esc(p.desc)}</p><ul>${p.prayers.map(k=>`<li>${esc(PRAYERS[k].name)}</li>`).join("")}</ul></div>`).join("");
+
+  const sel = $("#feastSel");
+  const t = today0();
+  const upcoming = FEASTS.map(([m,d,name]) => {
+    let dt = new Date(t.getFullYear(), m-1, d);
+    if (addDays(dt,-30) < t) dt = new Date(t.getFullYear()+1, m-1, d);
+    return {dt, name};
+  }).sort((a,b)=>a.dt-b.dt);
+  sel.innerHTML = `<option value="">Escolha uma festa…</option>` + upcoming.map(f => `<option value="${iso(f.dt)}">${fmt(f.dt)} ${f.dt.getFullYear()} · ${esc(f.name)}</option>`).join("");
+  $("#feastList").innerHTML = upcoming.slice(0,8).map((f,i) => `<li class="${i===0?'next':''}"><span class="dt">${fmt(f.dt)} ${f.dt.getFullYear()}</span><span>${esc(f.name)}<br><span class="st">começar em ${fmt(addDays(f.dt,-30), true)}</span></span><button data-pick="${iso(f.dt)}">Escolher</button></li>`).join("");
+  sel.value = state.date && upcoming.some(f=>iso(f.dt)===state.date) ? state.date : "";
+  $("#consDate").value = state.date || "";
+  renderCal();
+}
+function renderCal(){
+  const r = $("#calResult");
+  if (!state.date){ r.innerHTML = `<dt>Início</dt><dd>—</dd><dt>Consagração</dt><dd>—</dd>`; return; }
+  const s = startOf(state.date);
+  r.innerHTML = `<dt>1º dia</dt><dd>${fmt(s,true)}</dd><dt>1ª semana</dt><dd>${fmt(addDays(s,12),true)}</dd><dt>2ª semana</dt><dd>${fmt(addDays(s,18),true)}</dd><dt>3ª semana</dt><dd>${fmt(addDays(s,24),true)}</dd><dt>Consagração</dt><dd>${fmt(parse(state.date),true)}</dd>`;
+}
+function setDate(v){
+  state.date = v || null; save(); renderCal(); renderToday(); renderDayList(); if (view==="roteiro") renderDay(cur);
+  const sel = $("#feastSel"); sel.value = [...sel.options].some(o=>o.value===v) ? v : ""; $("#consDate").value = v || "";
+  if (v) toast("Data salva neste navegador");
+}
+
+/* ---------- roteiro ---------- */
+let cur = 1;
+function renderDayList(){
+  const n = currentDay(); const doneCount = Array.from({length:31},(_,i)=>i+1).filter(isDone).length;
+  let h = `<div class="pbox"><div class="ptxt">${doneCount} de 31 dias concluídos</div><div class="progress"><i style="width:${(doneCount/31*100).toFixed(1)}%"></i></div></div>`;
+  PHASES.forEach(p => {
+    h += `<h4>${esc(p.short)}</h4>`;
+    for (let d=p.days[0]; d<=p.days[1]; d++){
+      h += `<button data-day="${d}" class="${isDone(d)?'done':''} ${n===d?'today':''}" aria-current="${d===cur}"><span class="num">${d}</span><span class="t">${esc(BOOK[d][0])}</span><span class="dot" aria-hidden="true"></span></button>`;
+    }
+  });
+  $("#dayList").innerHTML = h;
+  const active = $("#dayList [aria-current='true']");
+  if (active && window.innerWidth <= 860) active.scrollIntoView({block:"nearest", inline:"center"});
+}
+function prayerDetails(k, open){
+  const p = PRAYERS[k];
+  if (p.link) return `<details class="pr"><summary>${esc(p.name)} <small>${esc(p.sub)}</small></summary><div class="prbody"><p>A fórmula completa, com espaço para o seu nome, está na aba <a href="#consagracao" data-go="consagracao">Dia da consagração</a>.</p></div></details>`;
+  let b = "";
+  if (p.stanzas) b += p.stanzas.map(s=>`<p class="st">${esc(s)}</p>`).join("");
+  if (p.paras) b += p.paras.map(s=>`<p>${esc(s)}</p>`).join("");
+  if (p.groups) b += p.groups.map(([g,items])=>`<h5 class="label" style="margin:.8em 0 .3em">${esc(g)}</h5><ol style="margin:0 0 .6em;padding-left:1.3rem">${items.map(i=>`<li>${esc(i)}</li>`).join("")}</ol>`).join("");
+  if (p.lines) b += `<ul class="lit">${p.lines.map(l=>{ const [a,r] = l.split("|"); return `<li>${esc(a)}${r?` <em>${esc(r)}</em>`:""}</li>`; }).join("")}</ul>`;
+  if (p.after) b += p.after.map(s=>`<p class="st vr">${esc(s)}</p>`).join("");
+  return `<details class="pr" ${open?"open":""}><summary>${esc(p.name)} ${p.sub?`<small>${esc(p.sub)}</small>`:""}</summary><div class="prbody">${b}</div></details>`;
+}
+function renderDay(d){
+  cur = d; const p = phaseOf(d); const bk = BOOK[d]; const med = MED[String(d)];
+  const dt = dateOfDay(d);
+  const checks = state.done[d] || [];
+  let medHtml = "";
+  if (med){
+    medHtml = `<div class="block"><div class="label">Meditação da apostila</div><h3>${esc(med.s)}</h3><div class="reading">${med.b.map(it=> it.t==="h" ? `<h5>${esc(it.x)}</h5>` : it.t==="v" ? `<p class="verse">${esc(it.x)}</p>` : `<p>${esc(it.x)}</p>`).join("")}</div></div>`;
+  } else {
+    medHtml = `<div class="block"><div class="label">Hoje</div><h3>Confissão, comunhão e consagração</h3><div class="reading"><p>Depois da comunhão, reze a fórmula da consagração e assine-a. Ofereça um pequeno tributo a Jesus e a Maria: um jejum, uma mortificação, uma esmola, uma vela.</p><p><button class="pagerbtn" data-go="consagracao" style="background:var(--lapis);color:var(--lapis-ink);border:0;border-radius:5px;padding:9px 14px;cursor:pointer">Abrir a fórmula da consagração</button></p></div></div>`;
+  }
+  $("#dayView").innerHTML = `
+    <header>
+      <div class="label">${esc(p.name)} · ${d}º dia de 31</div>
+      <h2>${esc(bk[0])}</h2>
+      <div class="meta">${dt ? fmt(dt,true) + " · " : ""}${esc(p.goal)}</div>
+    </header>
+    <div class="block">
+      <div class="label">1 · Orações do período</div>
+      ${p.invoc ? `<p class="invoc" style="margin:0">${esc(p.invoc)}</p>` : ""}
+      <div>${p.prayers.map(k=>prayerDetails(k,false)).join("")}</div>
+    </div>
+    ${medHtml.replace('<div class="label">Meditação da apostila</div>','<div class="label">2 · Meditação da apostila</div>')}
+    <div class="block">
+      <div class="label">3 · No livro <i style="text-transform:none;letter-spacing:0;font-family:var(--f-body)">Exercícios Espirituais</i></div>
+      <dl class="book">
+        <dt>Meditação</dt><dd>${d===31?"Nossa Consagração a Jesus por Maria":esc(bk[0])}</dd>
+        <dt>Leitura</dt><dd>${esc(bk[1])}</dd>
+        <dt>Tema</dt><dd>${esc(bk[2])}</dd>
+      </dl>
+      <p style="margin:0;color:var(--muted);font-size:.92rem">Leia no livro a meditação completa, a oração e a jaculatória do dia.</p>
+    </div>
+    <div class="block">
+      <div class="label">4 · Para rezar e partilhar</div>
+      <p class="ask">${esc(bk[3])}</p>
+      <div class="checks" role="group" aria-label="Marcar o dia">
+        ${CHECKS.map((c,i)=>`<label><input type="checkbox" id="ck-${d}-${i}" data-ck="${i}" ${checks[i]?"checked":""}> ${esc(c)}</label>`).join("")}
+      </div>
+    </div>
+    <div class="block journal">
+      <label for="nota-${d}">5 · Minhas percepções do ${d}º dia</label>
+      <textarea id="nota-${d}" data-nota="${d}" placeholder="O que Deus falou ao seu coração hoje? Uma moção, uma luz, um propósito, uma dificuldade…">${esc(state.notes[d]||"")}</textarea>
+      <p class="savest"><span id="saveSt">${(state.notes[d]||"").trim() ? "Salvo" : ""}</span> <span class="storeInfo"></span> · <a href="#diario" data-go="diario">Reler meu diário</a></p>
+    </div>
+    <div class="pager">
+      <button data-day="${d-1}" ${d<=1?"disabled":""}>← ${d>1?`${d-1}º dia`:"Início"}</button>
+      <button class="primary" data-day="${d+1}" ${d>=31?"disabled":""}>${d<31?`${d+1}º dia →`:"Fim"}</button>
+    </div>`;
+  renderDayList(); renderStoreInfo();
+}
+
+/* ---------- orações / consagração ---------- */
+function renderPrayers(){
+  const uses = k => PHASES.filter(p=>p.prayers.includes(k)).map(p=>p.short);
+  $("#prayerList").innerHTML = PR_ORDER.map(k => prayerDetails(k,false).replace('<div class="prbody">', `<div class="prbody"><div class="use">${uses(k).map(u=>`<span class="chip">${esc(u)}</span>`).join("")}</div>`)).join("");
+}
+function renderFormula(){
+  const nm = state.name.trim();
+  $("#formula").innerHTML = `<h3>Consagração de si mesmo a Jesus Cristo, a Sabedoria Encarnada, pelas mãos de Maria</h3><div class="sub">SÃO LUÍS MARIA GRIGNION DE MONTFORT</div>` +
+    FORMULA.map(p => `<p>${esc(p).replace("{NOME}", `<span class="nm">${nm?esc(nm):"&nbsp;".repeat(28)}</span>`)}</p>`).join("") +
+    `<div class="sign"><div>Assinatura</div><div>Data${state.date?`: ${fmt(parse(state.date),true)}`:""}</div></div>`;
+}
+
+/* ---------- diário e gravação ---------- */
+let remote = null, downloads = null;
+const timers = {}, chain = {};
+function setSaveSt(t){ const el = document.getElementById("saveSt"); if (el) el.textContent = t; }
+function renderStoreInfo(){
+  const msg = remote ? "Gravado na sua conta: só você vê, em qualquer aparelho." : "Gravado neste navegador.";
+  document.querySelectorAll(".storeInfo").forEach(el => el.textContent = msg);
+}
+function persist(d){
+  save();
+  if (!remote){ setSaveSt("Salvo"); return; }
+  const body = {dia:d, texto: state.notes[d]||"", checks: (state.done[d]||[false,false,false,false]).map(Boolean), atualizado: new Date().toISOString()};
+  const ref = remote.doc("d"+String(d).padStart(2,"0"));
+  chain[d] = (chain[d]||Promise.resolve()).then(() => ref.set(body)).then(
+    () => setSaveSt("Salvo"),
+    err => { if (err && (err.code==="invalid_argument" || err.code==="revoked" || err.code==="not_granted")){ remote = null; renderStoreInfo(); } setSaveSt("Salvo neste navegador"); });
+}
+function applyRemote(d, v){
+  if (typeof v.texto === "string"){
+    const ta = document.getElementById("nota-"+d);
+    const editing = ta && document.activeElement === ta;
+    if (!editing && !timers[d]){ state.notes[d] = v.texto; if (ta && ta.value !== v.texto) ta.value = v.texto; }
+  }
+  if (Array.isArray(v.checks)){
+    state.done[d] = v.checks.map(Boolean);
+    if (d === cur) v.checks.forEach((c,i) => { const el = document.getElementById(`ck-${d}-${i}`); if (el) el.checked = !!c; });
+  }
+}
+(async function initRemote(){
+  try {
+    if (!window.claude || !window.claude.use) return;
+    claude.use("downloads").then(dl => { downloads = dl; const b = document.getElementById("dlAll"); if (b) b.hidden = !dl; }).catch(()=>{});
+    const [db, user] = await Promise.all([claude.use("db"), claude.use("user")]);
+    if (!db || !user) return;
+    const uid = await user.id();
+    if (!uid) return;
+    if (await user.can("data.write") === false) return;
+    remote = db.collection("data/users/" + uid);
+    renderStoreInfo();
+    let first = true;
+    remote.onSnapshot(snap => {
+      const seen = new Set();
+      snap.docs.forEach(doc => { const v = doc.data(); const d = +(v && v.dia); if (d>=1 && d<=31){ seen.add(d); applyRemote(d, v); } });
+      if (first){
+        first = false;
+        const keys = new Set([...Object.keys(state.notes), ...Object.keys(state.done)].map(Number));
+        keys.forEach(d => { if (d>=1 && d<=31 && !seen.has(d) && ((state.notes[d]||"").trim() || (state.done[d]||[]).some(Boolean))) persist(d); });
+      }
+      save(); renderDayList(); if (view==="diario") renderJournal();
+    }, () => { remote = null; renderStoreInfo(); });
+  } catch(e){}
+})();
+
+function journalDays(){ return Array.from({length:31},(_,i)=>i+1).filter(d => (state.notes[d]||"").trim()); }
+function renderJournal(){
+  renderStoreInfo();
+  const days = journalDays();
+  const box = $("#journal");
+  if (!days.length){
+    box.innerHTML = `<div class="empty"><h3 style="font-size:1.4rem;margin-bottom:6px">Seu diário ainda está em branco</h3><p style="margin:0 0 14px;color:var(--muted)">No roteiro, cada dia termina com um espaço para escrever suas percepções. Elas aparecem aqui, dia após dia.</p><button class="btn primary" data-day="${cur}">Abrir o ${cur}º dia</button></div>`;
+    return;
+  }
+  box.innerHTML = `<p class="savest">${days.length} ${days.length>1?"dias escritos":"dia escrito"} de 31</p>` + days.map(d => {
+    const p = phaseOf(d), dt = dateOfDay(d);
+    return `<article class="entry"><div class="label">${d}º dia · ${esc(p.short)}${dt?` · ${fmt(dt,true)}`:""}</div><h3>${esc(BOOK[d][0])}</h3><p class="q">${esc(BOOK[d][3])}</p><p class="txt">${esc(state.notes[d])}</p><button data-day="${d}">Abrir este dia</button></article>`;
+  }).join("");
+}
+function journalText(){
+  const head = "MEU DIÁRIO DA CONSAGRAÇÃO\nTotus Tuus — Consagração a Jesus por Maria" + (state.date ? `\nConsagração: ${fmt(parse(state.date),true)}` : "") + "\n";
+  return head + journalDays().map(d => { const dt = dateOfDay(d); return `\n— ${d}º dia · ${phaseOf(d).short}${dt?` · ${fmt(dt,true)}`:""}\n${BOOK[d][0]}\n${BOOK[d][3]}\n\n${state.notes[d].trim()}\n`; }).join("");
+}
+document.addEventListener("click", async e => {
+  if (e.target.id === "copyAll"){
+    if (!journalDays().length){ toast("Ainda não há nada escrito"); return; }
+    try { await navigator.clipboard.writeText(journalText()); toast("Diário copiado"); }
+    catch(err){ const r = document.createRange(); r.selectNodeContents($("#journal")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); toast("Texto selecionado: copie com Ctrl+C"); }
+  }
+  if (e.target.id === "dlAll" && downloads){
+    if (!journalDays().length){ toast("Ainda não há nada escrito"); return; }
+    try { await downloads.save({filename:"meu-diario-da-consagracao.txt", data: journalText()}); } catch(err){ if (err && err.code === "unavailable") e.target.hidden = true; }
+  }
+});
+
+/* ---------- navegação ---------- */
+let view = "inicio";
+function show(v, opts={}){
+  view = v;
+  document.querySelectorAll("section.view").forEach(s => s.hidden = s.id !== "v-"+v);
+  document.querySelectorAll("nav.tabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.v===v));
+  if (v==="roteiro") renderDay(opts.day || cur);
+  if (v==="diario") renderJournal();
+  const token = v==="roteiro" ? "dia"+cur : v;
+  try { history.replaceState(null, "", "#"+token); } catch(e){}
+  if (!opts.keepScroll) window.scrollTo({top: v==="inicio"?0:document.querySelector("nav.tabs").offsetTop, behavior:"auto"});
+}
+function toast(msg){ const t=$("#toast"); t.textContent=msg; t.hidden=false; clearTimeout(toast._t); toast._t=setTimeout(()=>t.hidden=true,1800); }
+
+document.addEventListener("click", e => {
+  const day = e.target.closest("[data-day]");
+  if (day && !day.disabled){ const d = +day.dataset.day; if (d>=1 && d<=31){ cur = d; show("roteiro",{day:d}); } return; }
+  const go = e.target.closest("[data-go]");
+  if (go){ e.preventDefault(); const g = go.dataset.go; if (g==="inicio-cal"){ show("inicio"); $("#feastSel").scrollIntoView({block:"center"}); $("#feastSel").focus(); } else show(g); return; }
+  const tab = e.target.closest("nav.tabs button"); if (tab){ show(tab.dataset.v); return; }
+  const pick = e.target.closest("[data-pick]"); if (pick){ setDate(pick.dataset.pick); return; }
+});
+document.addEventListener("change", e => {
+  if (e.target.id==="feastSel" && e.target.value) setDate(e.target.value);
+  if (e.target.id==="consDate") setDate(e.target.value);
+  if (e.target.dataset.ck !== undefined){
+    const arr = state.done[cur] || [false,false,false,false]; arr[+e.target.dataset.ck] = e.target.checked; state.done[cur] = arr; persist(cur); renderDayList();
+    if (isDone(cur)) toast(`${cur}º dia concluído`);
+  }
+});
+document.addEventListener("input", e => {
+  if (e.target.id==="consName"){ state.name = e.target.value; save(); renderFormula(); }
+  if (e.target.dataset.nota){ const d = +e.target.dataset.nota; state.notes[d] = e.target.value; save(); setSaveSt("Salvando…"); clearTimeout(timers[d]); timers[d] = setTimeout(()=>{ delete timers[d]; persist(d); }, 900); }
+});
+document.addEventListener("focusout", e => { if (e.target.dataset && e.target.dataset.nota){ const d = +e.target.dataset.nota; if (timers[d]){ clearTimeout(timers[d]); delete timers[d]; persist(d); } } });
+
+/* ---------- início ---------- */
+renderToday(); renderInicio(); renderPrayers(); renderFormula(); $("#consName").value = state.name;
+(function boot(){
+  const h = (location.hash||"").slice(1);
+  const m = h.match(/^dia(\d{1,2})$/);
+  const n = currentDay();
+  if (m && +m[1]>=1 && +m[1]<=31){ cur = +m[1]; show("roteiro",{day:cur, keepScroll:true}); }
+  else if (["inicio","roteiro","oracoes","consagracao","diario"].includes(h)){ if (n>=1 && n<=31) cur = n; show(h,{keepScroll:true}); }
+  else { if (n>=1 && n<=31) cur = n; show("inicio",{keepScroll:true}); }
+})();
+</script>
+
+</body>
+</html>
