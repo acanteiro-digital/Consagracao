@@ -199,6 +199,12 @@ footer{border-top:1px solid var(--line);padding-block:20px;color:var(--muted);fo
 .entry .q{font-style:italic;color:var(--muted);margin:0}
 .entry .txt{white-space:pre-wrap;margin:4px 0 0}
 .entry button{justify-self:start;background:none;border:0;padding:0;color:var(--link);cursor:pointer;text-decoration:underline;text-underline-offset:3px;font-size:.9rem}
+.prev{background:var(--gold-soft);border-left:3px solid var(--gold);border-radius:6px;padding:12px 16px;margin:0 0 12px}
+.prev .label{color:var(--gold);margin-bottom:4px}
+.prev p{white-space:pre-wrap;margin:0}
+.prev + .prev{margin-top:-4px}
+.cycle{margin-top:28px}
+.cycle summary{cursor:pointer;font-family:var(--f-label);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:8px 0}
 .empty{background:var(--surface);border:1px dashed var(--line);border-radius:8px;padding:24px;max-width:760px}
 .faqtools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;max-width:820px}
 .faqtools input{flex:1 1 260px}
@@ -864,9 +870,11 @@ const FEASTS = [
 
 /* ---------- estado ---------- */
 const KEY = "totus-tuus-v1";
-let state = {date:null, name:"", done:{}, notes:{}};
+let state = {date:null, name:"", done:{}, notes:{}, noteAt:{}, historico:[]};
 try { const s = JSON.parse(localStorage.getItem(KEY)||"null"); if (s) state = Object.assign(state, s); } catch(e){}
 if (!state.notes) state.notes = {};
+if (!state.noteAt) state.noteAt = {};
+if (!Array.isArray(state.historico)) state.historico = [];
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} };
 
 const $ = s => document.querySelector(s);
@@ -892,7 +900,7 @@ function renderToday(){
   if (!state.date){ box.innerHTML = `<span class="label" style="color:#e4c77d">Sua preparação</span><b>Escolha a data</b><small>Defina a festa da consagração para o site marcar o dia de hoje.</small><br><button data-go="inicio-cal">Escolher data</button>`; return; }
   const cons = parse(state.date);
   if (n < 1){ box.innerHTML = `<span class="label" style="color:#e4c77d">Começa em ${1-n} dia${1-n>1?"s":""}</span><b>${fmt(startOf(state.date),true)}</b><small>Consagração em ${fmt(cons,true)}</small><br><button data-day="1">Ver o 1º dia</button>`; return; }
-  if (n > 31){ box.innerHTML = `<span class="label" style="color:#e4c77d">Consagração feita</span><b>${fmt(cons,true)}</b><small>Renove-a todos os anos nesta data.</small><br><button data-go="consagracao">Ver a fórmula</button>`; return; }
+  if (n > 31){ box.innerHTML = `<span class="label" style="color:#e4c77d">Consagração feita</span><b>${fmt(cons,true)}</b><small>Renove-a todos os anos nesta data.</small><br><button data-go="inicio-cal">Preparar a renovação</button>`; return; }
   const p = phaseOf(n);
   box.innerHTML = `<span class="label" style="color:#e4c77d">Hoje · ${esc(p.short)}</span><b>${n}º dia de 31</b><small>${esc(BOOK[n][0])}</small><br><button data-day="${n}">Abrir o dia de hoje</button>`;
 }
@@ -924,7 +932,28 @@ function renderCal(){
   const s = startOf(state.date);
   r.innerHTML = `<dt>1º dia</dt><dd>${fmt(s,true)}</dd><dt>1ª semana</dt><dd>${fmt(addDays(s,12),true)}</dd><dt>2ª semana</dt><dd>${fmt(addDays(s,18),true)}</dd><dt>3ª semana</dt><dd>${fmt(addDays(s,24),true)}</dd><dt>Consagração</dt><dd>${fmt(parse(state.date),true)}</dd>`;
 }
+function hasCycleData(){ return Object.keys(state.notes).some(d => (state.notes[d]||"").trim()) || Object.keys(state.done).some(d => (state.done[d]||[]).some(Boolean)); }
+function archiveCycle(){
+  const dias = {};
+  for (let d=1; d<=31; d++){
+    const t = (state.notes[d]||"").trim();
+    if (t) dias[d] = {texto: state.notes[d], escrito: state.noteAt[d] || iso(dateOfDay(d))};
+  }
+  const old = Object.keys(state.notes).concat(Object.keys(state.done)).map(Number).filter(d => d>=1 && d<=31);
+  if (Object.keys(dias).length){
+    state.historico = state.historico.filter(c => c.consagracao !== state.date);
+    state.historico.push({consagracao: state.date, dias});
+    state.historico.sort((a,b) => a.consagracao < b.consagracao ? 1 : -1);
+  }
+  state.notes = {}; state.done = {}; state.noteAt = {};
+  save(); persistHistory();
+  [...new Set(old)].forEach(d => persist(d));
+}
 function setDate(v){
+  if (v && state.date && v !== state.date && parse(state.date) < today0() && hasCycleData()){
+    const ok = confirm(`Começar a renovação?\n\nOK: seu diário da consagração de ${fmt(parse(state.date),true)} fica guardado e aparece em cada dia da renovação; o roteiro recomeça em branco.\n\nCancelar: apenas trocar a data, sem guardar nem limpar nada.`);
+    if (ok){ archiveCycle(); toast("Diário anterior guardado"); }
+  }
   state.date = v || null; save(); renderCal(); renderToday(); renderDayList(); if (view==="roteiro") renderDay(cur);
   const sel = $("#feastSel"); sel.value = [...sel.options].some(o=>o.value===v) ? v : ""; $("#consDate").value = v || "";
   if (v) toast("Data salva neste navegador");
@@ -1004,6 +1033,7 @@ function renderDay(d){
     </div>
     <div class="block journal">
       <label for="nota-${d}">5 · Minhas percepções do ${d}º dia</label>
+      ${prevEntries(d)}
       <textarea id="nota-${d}" data-nota="${d}" placeholder="O que Deus falou ao seu coração hoje? Uma moção, uma luz, um propósito, uma dificuldade…">${esc(state.notes[d]||"")}</textarea>
       <p class="savest"><span id="saveSt">${(state.notes[d]||"").trim() ? "Salvo" : ""}</span> <span class="storeInfo"></span> · <a href="#diario" data-go="diario">Reler meu diário</a></p>
     </div>
@@ -1040,6 +1070,19 @@ function renderFormula(){
     `<div class="sign"><div>Assinatura</div><div>Data${state.date?`: ${fmt(parse(state.date),true)}`:""}</div></div>`;
 }
 
+/* ---------- consagrações anteriores ---------- */
+const fmtIso = s => { try { return fmt(parse(String(s).slice(0,10)), true); } catch(e){ return ""; } };
+function prevEntries(d){
+  return state.historico.filter(c => c.dias && c.dias[d] && (c.dias[d].texto||"").trim()).map(c => {
+    const e = c.dias[d];
+    return `<div class="prev"><div class="label">Na consagração de ${esc(fmtIso(c.consagracao))} · ${d}º dia · escrito em ${esc(fmtIso(e.escrito))}</div><p>${esc(e.texto)}</p></div>`;
+  }).join("");
+}
+function writtenNote(d){
+  const w = state.noteAt[d], dt = dateOfDay(d);
+  return w && (!dt || w !== iso(dt)) ? ` · escrito em ${fmtIso(w)}` : "";
+}
+
 /* ---------- diário e gravação ---------- */
 let remote = null, downloads = null;
 const timers = {}, chain = {};
@@ -1053,28 +1096,44 @@ function renderStoreInfo(){
 let firstSync = true;
 function handleSnap(snap){
   const seen = new Set();
+  let remoteHist = null;
+  snap.docs.forEach(doc => { if (doc.id === "historico"){ remoteHist = doc.data(); } });
+  const histAdded = remoteHist ? mergeHistory(remoteHist.ciclos) : false;
+  if (firstSync && state.historico.length && (!remoteHist || (remoteHist.ciclos||[]).length < state.historico.length)) persistHistory();
   snap.docs.forEach(doc => { const v = doc.data(); const d = +(v && v.dia); if (d>=1 && d<=31){ seen.add(d); applyRemote(d, v); } });
   if (firstSync){
     firstSync = false;
     const keys = new Set([...Object.keys(state.notes), ...Object.keys(state.done)].map(Number));
     keys.forEach(d => { if (d>=1 && d<=31 && !seen.has(d) && ((state.notes[d]||"").trim() || (state.done[d]||[]).some(Boolean))) persist(d); });
   }
-  save(); renderDayList(); if (view==="diario") renderJournal();
+  save(); renderDayList(); if (view==="diario") renderJournal(); if (histAdded && view==="roteiro" && document.activeElement?.dataset?.nota === undefined) renderDay(cur);
 }
 function persist(d){
   save();
   if (!remote){ setSaveSt("Salvo"); return; }
-  const body = {dia:d, texto: state.notes[d]||"", checks: (state.done[d]||[false,false,false,false]).map(Boolean), atualizado: new Date().toISOString()};
+  const body = {dia:d, texto: state.notes[d]||"", checks: (state.done[d]||[false,false,false,false]).map(Boolean), escrito: state.noteAt[d] || "", atualizado: new Date().toISOString()};
   const ref = remote.doc("d"+String(d).padStart(2,"0"));
   chain[d] = (chain[d]||Promise.resolve()).then(() => ref.set(body)).then(
     () => setSaveSt("Salvo"),
     err => { if (err && (err.code==="invalid_argument" || err.code==="revoked" || err.code==="not_granted" || err.code==="permission-denied")){ remote = null; renderStoreInfo(); } setSaveSt("Salvo neste navegador"); });
 }
+function persistHistory(){
+  if (!remote) return;
+  remote.doc("historico").set({ciclos: state.historico, atualizado: new Date().toISOString()}).catch(() => toast("Não foi possível guardar o histórico na conta"));
+}
+function mergeHistory(ciclos){
+  if (!Array.isArray(ciclos)) return;
+  const byDate = {}; state.historico.forEach(c => byDate[c.consagracao] = c);
+  let added = false;
+  ciclos.forEach(c => { if (c && c.consagracao && c.dias && !byDate[c.consagracao]){ byDate[c.consagracao] = c; added = true; } });
+  state.historico = Object.values(byDate).sort((a,b) => a.consagracao < b.consagracao ? 1 : -1);
+  return added;
+}
 function applyRemote(d, v){
   if (typeof v.texto === "string"){
     const ta = document.getElementById("nota-"+d);
     const editing = ta && document.activeElement === ta;
-    if (!editing && !timers[d]){ state.notes[d] = v.texto; if (ta && ta.value !== v.texto) ta.value = v.texto; }
+    if (!editing && !timers[d]){ state.notes[d] = v.texto; if (ta && ta.value !== v.texto) ta.value = v.texto; if (typeof v.escrito === "string" && v.escrito) state.noteAt[d] = v.escrito; }
   }
   if (Array.isArray(v.checks)){
     state.done[d] = v.checks.map(Boolean);
@@ -1102,27 +1161,31 @@ function renderJournal(){
   renderStoreInfo();
   const days = journalDays();
   const box = $("#journal");
-  if (!days.length){
+  if (!days.length && !state.historico.length){
     box.innerHTML = `<div class="empty"><h3 style="font-size:1.4rem;margin-bottom:6px">Seu diário ainda está em branco</h3><p style="margin:0 0 14px;color:var(--muted)">No roteiro, cada dia termina com um espaço para escrever suas percepções. Elas aparecem aqui, dia após dia.</p><button class="btn primary" data-day="${cur}">Abrir o ${cur}º dia</button></div>`;
     return;
   }
-  box.innerHTML = `<p class="savest">${days.length} ${days.length>1?"dias escritos":"dia escrito"} de 31</p>` + days.map(d => {
+  box.innerHTML = `<p class="savest">${days.length ? `${days.length} ${days.length>1?"dias escritos":"dia escrito"} de 31` : "Nenhum dia escrito nesta preparação ainda."}</p>` + days.map(d => {
     const p = phaseOf(d), dt = dateOfDay(d);
-    return `<article class="entry"><div class="label">${d}º dia · ${esc(p.short)}${dt?` · ${fmt(dt,true)}`:""}</div><h3>${esc(BOOK[d][0])}</h3><p class="q">${esc(BOOK[d][3])}</p><p class="txt">${esc(state.notes[d])}</p><button data-day="${d}">Abrir este dia</button></article>`;
+    return `<article class="entry"><div class="label">${d}º dia · ${esc(p.short)}${dt?` · ${fmt(dt,true)}`:""}${esc(writtenNote(d))}</div><h3>${esc(BOOK[d][0])}</h3><p class="q">${esc(BOOK[d][3])}</p><p class="txt">${esc(state.notes[d])}</p><button data-day="${d}">Abrir este dia</button></article>`;
+  }).join("") + state.historico.map(c => {
+    const ds = Object.keys(c.dias||{}).map(Number).sort((a,b)=>a-b);
+    return `<details class="cycle"><summary>Consagração de ${esc(fmtIso(c.consagracao))} · ${ds.length} ${ds.length>1?"dias escritos":"dia escrito"}</summary>` + ds.map(d => `<article class="entry"><div class="label">${d}º dia · ${esc(phaseOf(d).short)} · escrito em ${esc(fmtIso(c.dias[d].escrito))}</div><h3>${esc(BOOK[d][0])}</h3><p class="txt">${esc(c.dias[d].texto)}</p></article>`).join("") + `</details>`;
   }).join("");
 }
 function journalText(){
   const head = "MEU DIÁRIO DA CONSAGRAÇÃO\nTotus Tuus — Consagração a Jesus por Maria" + (state.date ? `\nConsagração: ${fmt(parse(state.date),true)}` : "") + "\n";
-  return head + journalDays().map(d => { const dt = dateOfDay(d); return `\n— ${d}º dia · ${phaseOf(d).short}${dt?` · ${fmt(dt,true)}`:""}\n${BOOK[d][0]}\n${BOOK[d][3]}\n\n${state.notes[d].trim()}\n`; }).join("");
+  return head + journalDays().map(d => { const dt = dateOfDay(d); return `\n— ${d}º dia · ${phaseOf(d).short}${dt?` · ${fmt(dt,true)}`:""}${writtenNote(d)}\n${BOOK[d][0]}\n${BOOK[d][3]}\n\n${state.notes[d].trim()}\n`; }).join("")
+    + state.historico.map(c => `\n\n===== CONSAGRAÇÃO DE ${fmtIso(c.consagracao).toUpperCase()} =====\n` + Object.keys(c.dias||{}).map(Number).sort((a,b)=>a-b).map(d => `\n— ${d}º dia · escrito em ${fmtIso(c.dias[d].escrito)}\n${BOOK[d][0]}\n\n${String(c.dias[d].texto).trim()}\n`).join("")).join("");
 }
 document.addEventListener("click", async e => {
   if (e.target.id === "copyAll"){
-    if (!journalDays().length){ toast("Ainda não há nada escrito"); return; }
+    if (!journalDays().length && !state.historico.length){ toast("Ainda não há nada escrito"); return; }
     try { await navigator.clipboard.writeText(journalText()); toast("Diário copiado"); }
     catch(err){ const r = document.createRange(); r.selectNodeContents($("#journal")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); toast("Texto selecionado: copie com Ctrl+C"); }
   }
   if (e.target.id === "dlAll" && downloads){
-    if (!journalDays().length){ toast("Ainda não há nada escrito"); return; }
+    if (!journalDays().length && !state.historico.length){ toast("Ainda não há nada escrito"); return; }
     try { await downloads.save({filename:"meu-diario-da-consagracao.txt", data: journalText()}); } catch(err){ if (err && err.code === "unavailable") e.target.hidden = true; }
   }
 });
@@ -1282,7 +1345,7 @@ document.addEventListener("change", e => {
 });
 document.addEventListener("input", e => {
   if (e.target.id==="consName"){ state.name = e.target.value; save(); renderFormula(); }
-  if (e.target.dataset.nota){ const d = +e.target.dataset.nota; state.notes[d] = e.target.value; save(); setSaveSt("Salvando…"); clearTimeout(timers[d]); timers[d] = setTimeout(()=>{ delete timers[d]; persist(d); }, 900); }
+  if (e.target.dataset.nota){ const d = +e.target.dataset.nota; state.notes[d] = e.target.value; state.noteAt[d] = iso(today0()); save(); setSaveSt("Salvando…"); clearTimeout(timers[d]); timers[d] = setTimeout(()=>{ delete timers[d]; persist(d); }, 900); }
 });
 document.addEventListener("focusout", e => { if (e.target.dataset && e.target.dataset.nota){ const d = +e.target.dataset.nota; if (timers[d]){ clearTimeout(timers[d]); delete timers[d]; persist(d); } } });
 
