@@ -1024,7 +1024,14 @@ renderToday(); renderInicio(); renderPrayers(); renderFormula(); $("#consName").
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script>
 /* Sincronização do diário entre aparelhos (login com Google + Firestore). */
-const FIREBASE_CONFIG = null;
+const FIREBASE_CONFIG = {
+  "apiKey": "AIzaSyBs7JY8eCcvNGbNDe8I9ioqrPV1jWYv71o",
+  "authDomain": "consagracao-b597b.firebaseapp.com",
+  "projectId": "consagracao-b597b",
+  "storageBucket": "consagracao-b597b.firebasestorage.app",
+  "messagingSenderId": "93148573979",
+  "appId": "1:93148573979:web:6c05d96abe88323b7de3be"
+};
 (function(){
   if (!FIREBASE_CONFIG || !window.firebase) return;
   firebase.initializeApp(FIREBASE_CONFIG);
