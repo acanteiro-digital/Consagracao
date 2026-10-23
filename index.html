@@ -6,6 +6,7 @@
 <meta name="description" content="Roteiro dos 33 dias de preparação para a Consagração a Jesus por Maria, segundo São Luís de Montfort.">
 <meta name="theme-color" content="#233e78">
 <style>[hidden]{display:none!important}body{margin:0}img{max-width:100%}</style>
+<script>window.CAN_EMBED=true</script>
 <title>Totus Tuus — Consagração</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -209,6 +210,13 @@ footer{border-top:1px solid var(--line);padding-block:20px;color:var(--muted);fo
 .faqform{background:var(--surface);border:1px solid var(--gold);border-radius:8px;padding:18px;display:grid;gap:10px;max-width:820px}
 .faqform textarea{width:100%;min-height:8rem;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:10px 12px;resize:vertical}
 .faqform .row{display:flex;gap:8px;flex-wrap:wrap}
+.yt{max-width:820px;display:grid;gap:8px}
+.yt .frame{position:relative;width:100%;aspect-ratio:16/9;max-width:100%;border-radius:8px;overflow:hidden;background:#000}
+.yt .frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.yt .card{display:flex;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 18px;text-decoration:none;color:var(--ink)}
+.yt .card .play{flex:none;width:44px;height:44px;border-radius:50%;background:var(--lapis);color:var(--lapis-ink);display:grid;place-items:center;font-size:1.1rem}
+.yt .card b{font-family:var(--f-display);font-size:1.2rem;display:block}
+.yt .src{font-size:.85rem;color:var(--muted);margin:0}
 .toast{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:5px;font-size:.9rem}
 @media (prefers-reduced-motion:no-preference){ .view{animation:fade .25s ease} @keyframes fade{from{opacity:.4}to{opacity:1}} }
 </style>
@@ -232,6 +240,7 @@ footer{border-top:1px solid var(--line);padding-block:20px;color:var(--muted);fo
     <button role="tab" data-v="roteiro" id="t-roteiro">Roteiro diário</button>
     <button role="tab" data-v="oracoes" id="t-oracoes">Orações</button>
     <button role="tab" data-v="consagracao" id="t-consagracao">Dia da consagração</button>
+    <button role="tab" data-v="videos" id="t-videos">Vídeos</button>
     <button role="tab" data-v="duvidas" id="t-duvidas">Dúvidas</button>
     <button role="tab" data-v="diario" id="t-diario">Meu diário</button>
   </div>
@@ -380,6 +389,16 @@ footer{border-top:1px solid var(--line);padding-block:20px;color:var(--muted);fo
     </div>
   </div>
 </section>
+<!-- VÍDEOS -->
+<section class="view" id="v-videos" hidden>
+  <div style="display:grid;gap:8px">
+    <div class="label">Pregações para meditar</div>
+    <h2 style="font-size:2rem">Vídeos da consagração</h2>
+    <p class="lede" style="margin:0">A playlist <i>Consagração a Nossa Senhora 2026</i>, da Ir. Kelly Patrícia (Instituto Hesed), com uma pregação para cada dia, no mesmo método de São Luís de Montfort. A numeração dos dias da playlist pode não coincidir com a do roteiro deste site; use os vídeos como apoio à meditação do dia.</p>
+  </div>
+  <div class="yt" data-yt-list="PLZvFgUMbxpyQ" data-title="Consagração a Nossa Senhora 2026" data-src="Ir. Kelly Patrícia · Instituto Hesed · playlist no YouTube"></div>
+</section>
+
 <!-- DÚVIDAS -->
 <section class="view" id="v-duvidas" hidden>
   <div style="display:grid;gap:8px">
@@ -387,6 +406,7 @@ footer{border-top:1px solid var(--line);padding-block:20px;color:var(--muted);fo
     <h2 style="font-size:2rem">Dúvidas frequentes</h2>
     <p class="lede" style="margin:0">Mesmo depois de muita leitura, algumas perguntas sempre aparecem. As respostas seguem o <i>Tratado da Verdadeira Devoção</i>, a apostila e o livro de exercícios. Você também pode enviar a sua dúvida ao grupo.</p>
   </div>
+  <div class="yt" data-yt="gaftw6gO9yk" data-title="Perguntas e respostas sobre a Consagração a Nossa Senhora" data-src="Ir. Kelly Patrícia · Instituto Hesed"></div>
   <div class="faqtools">
     <input type="text" id="faqSearch" placeholder="Procurar uma dúvida (ex.: confissão, correntinha, perdi um dia)" aria-label="Procurar uma dúvida">
   </div>
@@ -1107,6 +1127,18 @@ document.addEventListener("click", async e => {
   } catch(err){ toast("Não foi possível alterar: " + (err.code || "erro")); }
 });
 
+/* ---------- vídeos ---------- */
+function renderVideos(){
+  document.querySelectorAll(".yt").forEach(el => {
+    const id = el.dataset.yt, list = el.dataset.ytList, title = el.dataset.title, src = el.dataset.src;
+    const watch = list ? `https://www.youtube.com/playlist?list=${encodeURIComponent(list)}` : `https://www.youtube.com/watch?v=${encodeURIComponent(id)}`;
+    const embed = list ? `https://www.youtube-nocookie.com/embed/videoseries?list=${encodeURIComponent(list)}` : `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}`;
+    if (window.CAN_EMBED) el.innerHTML = `<div class="frame"><iframe src="${embed}" title="${esc(title)}" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><p class="src">${esc(title)} · ${esc(src)} · <a href="${watch}" target="_blank" rel="noopener">abrir no YouTube</a></p>`;
+    else el.innerHTML = `<a class="card" href="${watch}" target="_blank" rel="noopener"><span class="play" aria-hidden="true">▶</span><span><b>${esc(title)}</b><span class="src">${esc(src)} · assistir no YouTube</span></span></a>`;
+  });
+}
+renderVideos();
+
 /* ---------- navegação ---------- */
 let view = "inicio";
 function show(v, opts={}){
@@ -1151,7 +1183,7 @@ renderToday(); renderInicio(); renderPrayers(); renderFormula(); $("#consName").
   const m = h.match(/^dia(\d{1,2})$/);
   const n = currentDay();
   if (m && +m[1]>=1 && +m[1]<=31){ cur = +m[1]; show("roteiro",{day:cur, keepScroll:true}); }
-  else if (["inicio","roteiro","oracoes","consagracao","duvidas","diario"].includes(h)){ if (n>=1 && n<=31) cur = n; show(h,{keepScroll:true}); }
+  else if (["inicio","roteiro","oracoes","consagracao","videos","duvidas","diario"].includes(h)){ if (n>=1 && n<=31) cur = n; show(h,{keepScroll:true}); }
   else { if (n>=1 && n<=31) cur = n; show("inicio",{keepScroll:true}); }
 })();
 </script>
