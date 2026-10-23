@@ -895,7 +895,7 @@ function renderDay(d){
       <div class="label">3 · No livro <i style="text-transform:none;letter-spacing:0;font-family:var(--f-body)">Exercícios Espirituais</i></div>
       <dl class="book">
         <dt>Meditação</dt><dd>${d===31?"Nossa Consagração a Jesus por Maria":esc(bk[0])}</dd>
-        <dt>Leitura</dt><dd><b>${esc(bk[1])}</b> · <a href="https://padrepauloricardo.org/biblia" target="_blank" rel="noopener">ler na Bíblia do Pe. Paulo Ricardo</a></dd>
+        <dt>Leitura</dt><dd>${bibleLinks(bk[1])}<br><span class="savest">Abre o capítulo na Bíblia do Pe. Paulo Ricardo (tradução Pe. Matos Soares).</span></dd>
         <dt>Tema</dt><dd>${esc(bk[2])}</dd>
       </dl>
       <p style="margin:0;color:var(--muted);font-size:.92rem">Leia no livro a meditação completa, a oração e a jaculatória do dia.</p>
@@ -917,6 +917,20 @@ function renderDay(d){
       <button class="primary" data-day="${d+1}" ${d>=31?"disabled":""}>${d<31?`${d+1}º dia →`:"Fim"}</button>
     </div>`;
   renderDayList(); renderStoreInfo();
+}
+
+const BOOK_NAMES = {mt:"Mateus", lc:"Lucas", jo:"João", at:"Atos", pr:"Provérbios"};
+function bibleLinks(ref){
+  let book = null;
+  return ref.split(";").map(part => {
+    const m = part.trim().match(/^(?:([1-3]?[A-Za-zÀ-ú]+)\s+)?(\d+)(?:,(.+))?$/);
+    if (!m) return esc(part.trim());
+    if (m[1]) book = m[1].toLowerCase();
+    const cap = m[2];
+    const url = `https://padrepauloricardo.org/biblia/${encodeURIComponent(book)}?cap=${cap}&edition=matos-soares`;
+    const label = `${BOOK_NAMES[book] || book} ${cap}${m[3] ? ", " + m[3] : ""}`;
+    return `<a href="${url}" target="_blank" rel="noopener"><b>${esc(label)}</b></a>`;
+  }).join(" e ");
 }
 
 /* ---------- orações / consagração ---------- */
