@@ -385,7 +385,7 @@ footer{border-top:1px solid var(--line);padding-block:20px;color:var(--muted);fo
   <div style="display:grid;gap:8px">
     <div class="label">Perguntas e respostas</div>
     <h2 style="font-size:2rem">Dúvidas frequentes</h2>
-    <p class="lede" style="margin:0">Mesmo depois de muita leitura, algumas perguntas sempre aparecem. As respostas seguem o <i>Tratado da Verdadeira Devoção</i>, a apostila e o livro de exercícios.</p>
+    <p class="lede" style="margin:0">Mesmo depois de muita leitura, algumas perguntas sempre aparecem. As respostas seguem o <i>Tratado da Verdadeira Devoção</i>, a apostila e o livro de exercícios. Você também pode enviar a sua dúvida ao grupo.</p>
   </div>
   <div class="faqtools">
     <input type="text" id="faqSearch" placeholder="Procurar uma dúvida (ex.: confissão, correntinha, perdi um dia)" aria-label="Procurar uma dúvida">
@@ -1014,40 +1014,84 @@ const FAQ_DEFAULT = [
  {p:"Depois de consagrado, o que muda no dia a dia?", r:"O essencial é a prática interior: fazer todas as ações por Maria, com Maria, em Maria e para Maria, a fim de fazê-las mais perfeitamente por Jesus, com Jesus, em Jesus e para Jesus.\n\nAjudam também o Rosário, as festas de Nossa Senhora e a renovação frequente da entrega com as palavras: “Eu sou todo Vosso e tudo o que tenho Vos pertence, ó meu amável Jesus, por Maria, Vossa Santa Mãe!”"},
  {p:"Preciso renovar a consagração?", r:"Sim. São Luís pede que se renove pelo menos uma vez por ano, na mesma data, fazendo de novo as três semanas de preparação. Também se pode renová-la todos os meses e até todos os dias com uma breve oração de entrega."}
 ];
-window.faqItems = null; window.faqIsAdmin = false;
-let faqEditing = null, faqDeleting = null, faqQuery = "";
+window.faqItems = null; window.faqIsAdmin = false; window.faqMe = null;
+let faqEditing = null, faqDeleting = null, faqQuery = "", faqSending = false;
 const faqOpen = new Set();
-const faqList = () => (window.faqItems && window.faqItems.length ? window.faqItems : FAQ_DEFAULT.map((f,i)=>({id:null, p:f.p, r:f.r, ordem:i})));
 const norm = t => String(t).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
 function ansHtml(r){ return String(r).split(/\n\s*\n/).map(par => `<p>${esc(par).replace(/\n/g,"<br>")}</p>`).join(""); }
+function faqParts(){
+  const all = window.faqItems || [];
+  const official = all.filter(f => !f.autorUid);
+  const base = official.length ? official : FAQ_DEFAULT.map((f,i)=>({id:null, p:f.p, r:f.r, ordem:i}));
+  const main = base.concat(all.filter(f => f.autorUid && f.r)).sort((a,b) => a.ordem - b.ordem);
+  const pending = all.filter(f => f.autorUid && !f.r).sort((a,b) => a.ordem - b.ordem);
+  return {main, pending, all};
+}
+const fmtCriado = iso => { try { return fmt(new Date(iso), true); } catch(e){ return ""; } };
+function faqItemHtml(f, list, q, admin){
+  const me = window.faqMe, mine = me && f.autorUid && f.autorUid === me.uid;
+  const key = f.id || f.p;
+  const by = f.autorUid ? `<p class="savest" style="margin:0 0 .6em">Dúvida enviada por ${esc(f.autorNome || "alguém do grupo")}${f.criado ? " · " + fmtCriado(f.criado) : ""}</p>` : "";
+  const idx = list.indexOf(f);
+  let btns = "";
+  if (f.id && (admin || mine)){
+    const del = `<button class="btn danger" data-faq="${faqDeleting===f.id?"del-ok":"del"}" data-id="${esc(f.id)}">${faqDeleting===f.id?"Confirmar exclusão":(admin?"Excluir":"Excluir minha dúvida")}</button>`;
+    if (admin){
+      const canMove = f.r && list.every(x => x.id);
+      btns = `<button class="btn" data-faq="edit" data-id="${esc(f.id)}">${f.r ? "Editar" : "Responder"}</button>` +
+        (canMove ? `<button class="btn" data-faq="swap" data-id="${esc(f.id)}" data-other="${esc((list[idx-1]||{}).id||"")}" ${idx<=0?"disabled":""}>Subir</button><button class="btn" data-faq="swap" data-id="${esc(f.id)}" data-other="${esc((list[idx+1]||{}).id||"")}" ${idx>=list.length-1?"disabled":""}>Descer</button>` : "") + del;
+    } else btns = del;
+    btns = `<div class="adm">${btns}</div>`;
+  }
+  const body = f.r ? ansHtml(f.r) : `<p class="savest">Aguardando resposta.</p>`;
+  return `<details class="pr" data-fk="${esc(key)}" ${q || faqOpen.has(key) ? "open" : ""}><summary>${esc(f.p)}</summary><div class="prbody ans">${by}${body}${btns}</div></details>`;
+}
 function renderFaq(){
   const admin = !!window.faqIsAdmin && !!window.faqActions;
-  const items = faqList();
+  const {main, pending, all} = faqParts();
   const q = norm(faqQuery.trim());
-  const shown = q ? items.filter(f => norm(f.p + " " + f.r).includes(q)) : items;
+  const match = f => !q || norm(f.p + " " + f.r).includes(q);
   const adm = $("#faqAdmin");
+  let top = "";
+  if (window.faqActions){
+    if (window.faqMe) top += `<form class="faqform" id="faqAsk"><div class="label">Enviar uma dúvida ao grupo</div>
+      <textarea id="faqAskText" maxlength="600" placeholder="Escreva sua pergunta sobre a consagração. Ela fica visível para todos do grupo com o seu primeiro nome." style="min-height:5rem"></textarea>
+      <div class="row"><button class="btn primary" type="submit" ${faqSending?"disabled":""}>${faqSending?"Enviando…":"Enviar dúvida"}</button></div></form>`;
+    else top += `<div class="note" style="max-width:820px">Tem uma dúvida que não está aqui? <a href="#" data-acct="in">Entre com Google</a> para enviá-la ao grupo.</div>`;
+  }
   if (admin){
-    const ed = faqEditing ? items.find(f => f.id === faqEditing) : null;
-    adm.innerHTML = `<form class="faqform" id="faqForm"><div class="label">${ed ? "Editar dúvida" : "Incluir nova dúvida"}</div>
+    const ed = faqEditing ? all.find(f => f.id === faqEditing) : null;
+    const answering = ed && ed.autorUid && !ed.r;
+    top += `<form class="faqform" id="faqForm"><div class="label">${answering ? "Responder dúvida do grupo" : ed ? "Editar dúvida" : "Administrador · incluir nova dúvida com resposta"}</div>
       <input type="text" id="faqP" placeholder="Pergunta" value="${ed ? esc(ed.p) : ""}" required>
       <textarea id="faqR" placeholder="Resposta (deixe uma linha em branco para separar parágrafos)" required>${ed ? esc(ed.r) : ""}</textarea>
-      <div class="row"><button class="btn primary" type="submit">${ed ? "Salvar alteração" : "Incluir dúvida"}</button>${ed ? `<button class="btn" type="button" data-faq="cancel">Cancelar</button>` : ""}</div></form>`;
-  } else adm.innerHTML = "";
-  $("#faqList").innerHTML = shown.length ? shown.map((f, i) => `<details class="pr" data-fk="${esc(f.id || f.p)}" ${q || faqOpen.has(f.id || f.p) ? "open" : ""}><summary>${esc(f.p)}</summary><div class="prbody ans">${ansHtml(f.r)}${admin && f.id ? `<div class="adm">
-      <button class="btn" data-faq="edit" data-id="${esc(f.id)}">Editar</button>
-      <button class="btn" data-faq="up" data-id="${esc(f.id)}" ${items[0]===f?"disabled":""}>Subir</button>
-      <button class="btn" data-faq="down" data-id="${esc(f.id)}" ${items[items.length-1]===f?"disabled":""}>Descer</button>
-      <button class="btn danger" data-faq="${faqDeleting===f.id?"del-ok":"del"}" data-id="${esc(f.id)}">${faqDeleting===f.id?"Confirmar exclusão":"Excluir"}</button></div>` : ""}</div></details>`).join("")
-    : `<div class="empty">Nenhuma dúvida encontrada para “${esc(faqQuery)}”.</div>`;
+      <div class="row"><button class="btn primary" type="submit">${answering ? "Publicar resposta" : ed ? "Salvar alteração" : "Incluir dúvida"}</button>${ed ? `<button class="btn" type="button" data-faq="cancel">Cancelar</button>` : ""}</div></form>`;
+  }
+  adm.innerHTML = top;
+  const mainShown = main.filter(match), pendShown = pending.filter(match);
+  let h = mainShown.map(f => faqItemHtml(f, main, q, admin)).join("");
+  if (!mainShown.length && !pendShown.length) h = `<div class="empty">Nenhuma dúvida encontrada para “${esc(faqQuery)}”.</div>`;
+  if (pendShown.length) h += `<h3 style="font-size:1.4rem;margin:22px 0 6px">Dúvidas do grupo aguardando resposta</h3>` + pendShown.map(f => faqItemHtml(f, pending, q, admin)).join("");
+  $("#faqList").innerHTML = h;
 }
 document.addEventListener("toggle", e => { const k = e.target.dataset && e.target.dataset.fk; if (k === undefined) return; if (e.target.open) faqOpen.add(k); else faqOpen.delete(k); }, true);
 document.addEventListener("input", e => { if (e.target.id === "faqSearch"){ faqQuery = e.target.value; renderFaq(); } });
 document.addEventListener("submit", async e => {
+  if (e.target.id === "faqAsk"){
+    e.preventDefault();
+    const p = $("#faqAskText").value.trim();
+    if (p.length < 6){ toast("Escreva a sua dúvida com um pouco mais de detalhe"); return; }
+    faqSending = true; renderFaq();
+    try { await window.faqActions.ask(p); toast("Dúvida enviada. Ela já aparece para o grupo."); }
+    catch(err){ toast("Não foi possível enviar: " + (err.code || "erro")); }
+    faqSending = false; renderFaq();
+    return;
+  }
   if (e.target.id !== "faqForm") return;
   e.preventDefault();
   const p = $("#faqP").value.trim(), r = $("#faqR").value.trim();
   if (!p || !r){ toast("Preencha a pergunta e a resposta"); return; }
-  try { await window.faqActions.save({id: faqEditing, p, r}); toast(faqEditing ? "Dúvida atualizada" : "Dúvida incluída"); faqEditing = null; renderFaq(); }
+  try { await window.faqActions.save({id: faqEditing, p, r}); toast(faqEditing ? "Dúvida atualizada" : "Dúvida incluída"); if (faqEditing) faqOpen.add(faqEditing); faqEditing = null; renderFaq(); }
   catch(err){ toast("Não foi possível salvar: " + (err.code || "erro")); }
 });
 document.addEventListener("click", async e => {
@@ -1059,7 +1103,7 @@ document.addEventListener("click", async e => {
   if (act === "del"){ faqDeleting = id; renderFaq(); return; }
   try {
     if (act === "del-ok"){ await window.faqActions.remove(id); faqDeleting = null; toast("Dúvida excluída"); }
-    if (act === "up" || act === "down") await window.faqActions.move(id, act === "up" ? -1 : 1);
+    if (act === "swap" && b.dataset.other) await window.faqActions.swap(id, b.dataset.other);
   } catch(err){ toast("Não foi possível alterar: " + (err.code || "erro")); }
 });
 
@@ -1137,34 +1181,40 @@ const ADMIN_EMAIL = "anderson.canteiro@gmail.com";
     if (small) return `<a href="#" data-acct="in">${busy ? "Entrando…" : "Entrar com Google"}</a>`;
     return `<br><button class="btn primary" data-acct="in" style="margin-top:6px">${busy ? "Entrando…" : "Entrar com Google para ver o diário em todos os aparelhos"}</button>`;
   };
-  /* Dúvidas: todos leem; só o administrador escreve (garantido pelas regras do Firestore). */
+  /* Dúvidas: todos leem; qualquer pessoa conectada envia uma pergunta; só o administrador responde e organiza. */
   const faqCol = fs.collection("duvidas");
-  let faqLoaded = false, faqEmpty = false, seeding = false;
+  let faqLoaded = false, seeding = false;
   faqCol.orderBy("ordem").onSnapshot(snap => {
-    faqLoaded = true; faqEmpty = snap.empty;
-    window.faqItems = snap.docs.map(d => { const v = d.data(); return {id: d.id, p: v.pergunta || "", r: v.resposta || "", ordem: v.ordem || 0}; });
+    faqLoaded = true;
+    window.faqItems = snap.docs.map(d => { const v = d.data(); return {id: d.id, p: v.pergunta || "", r: v.resposta || "", ordem: +v.ordem || 0, autorUid: v.autorUid || null, autorNome: v.autorNome || "", criado: v.criado || ""}; });
     maybeSeed(); renderFaq();
   }, () => {});
   async function maybeSeed(){
-    if (!window.faqIsAdmin || !faqLoaded || !faqEmpty || seeding) return;
+    if (!window.faqIsAdmin || !faqLoaded || seeding) return;
+    if ((window.faqItems || []).some(f => !f.autorUid)) return;
     seeding = true;
     try { const b = fs.batch(); FAQ_DEFAULT.forEach((f,i) => b.set(faqCol.doc(), {pergunta:f.p, resposta:f.r, ordem:i, atualizado:new Date().toISOString()})); await b.commit(); }
     catch(err){ toast("Não foi possível preparar as dúvidas para edição: " + (err.code || "erro")); }
     seeding = false;
   }
+  const now = () => new Date().toISOString();
   window.faqActions = {
+    ask: p => {
+      const u = auth.currentUser; if (!u) throw {code:"faça login"};
+      const nome = ((u.displayName || "").trim().split(/\s+/)[0] || "Alguém do grupo").slice(0, 60);
+      return faqCol.add({pergunta: p.slice(0,600), resposta: "", ordem: Date.now(), autorUid: u.uid, autorNome: nome, criado: now(), atualizado: now()});
+    },
     save: async ({id, p, r}) => {
-      if (id) return faqCol.doc(id).update({pergunta:p, resposta:r, atualizado:new Date().toISOString()});
-      const max = (window.faqItems || []).reduce((m,f) => Math.max(m, f.ordem), -1);
-      return faqCol.add({pergunta:p, resposta:r, ordem:max+1, atualizado:new Date().toISOString()});
+      if (id) return faqCol.doc(id).update({pergunta:p, resposta:r, atualizado:now()});
+      const max = (window.faqItems || []).filter(f => !f.autorUid).reduce((m,f) => Math.max(m, f.ordem), -1);
+      return faqCol.add({pergunta:p, resposta:r, ordem:max+1, atualizado:now()});
     },
     remove: id => faqCol.doc(id).delete(),
-    move: async (id, dir) => {
-      const list = window.faqItems || []; const i = list.findIndex(f => f.id === id); const j = i + dir;
-      if (i < 0 || j < 0 || j >= list.length) return;
-      const b = fs.batch(); b.update(faqCol.doc(list[i].id), {ordem: list[j].ordem}); b.update(faqCol.doc(list[j].id), {ordem: list[i].ordem});
-      if (list[i].ordem === list[j].ordem) b.update(faqCol.doc(list[i].id), {ordem: list[j].ordem + dir * 0.5});
-      return b.commit();
+    swap: async (a, b) => {
+      const items = window.faqItems || []; const A = items.find(f => f.id === a), B = items.find(f => f.id === b);
+      if (!A || !B) return;
+      const bt = fs.batch(); let oa = B.ordem, ob = A.ordem; if (oa === ob) oa = ob - 0.5;
+      bt.update(faqCol.doc(a), {ordem: oa}); bt.update(faqCol.doc(b), {ordem: ob}); return bt.commit();
     }
   };
   auth.getRedirectResult().catch(()=>{});
@@ -1176,6 +1226,7 @@ const ADMIN_EMAIL = "anderson.canteiro@gmail.com";
       unsub = remote.onSnapshot(handleSnap, () => { remote = null; renderStoreInfo(); toast("Não foi possível sincronizar agora"); });
     } else remote = null;
     window.faqIsAdmin = !!(u && u.emailVerified && (u.email || "").toLowerCase() === ADMIN_EMAIL);
+    window.faqMe = u ? {uid: u.uid} : null;
     busy = false; renderStoreInfo(); renderFaq(); maybeSeed();
   });
   document.addEventListener("click", async e => {
