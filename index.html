@@ -217,6 +217,17 @@ footer{border-top:1px solid var(--line);padding-block:20px;color:var(--muted);fo
 .yt .card .play{flex:none;width:44px;height:44px;border-radius:50%;background:var(--lapis);color:var(--lapis-ink);display:grid;place-items:center;font-size:1.1rem}
 .yt .card b{font-family:var(--f-display);font-size:1.2rem;display:block}
 .yt .src{font-size:.85rem;color:var(--muted);margin:0}
+.help{display:grid;gap:34px;max-width:900px}
+.help h3{font-size:1.55rem;margin-bottom:10px}
+.help p{margin:0 0 .8em;max-width:68ch}
+.tabsgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.tabsgrid button{text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 16px;cursor:pointer;display:grid;gap:4px;color:var(--ink)}
+.tabsgrid button:hover{border-color:var(--gold)}
+.tabsgrid b{font-family:var(--f-display);font-size:1.25rem}
+.tabsgrid span{font-size:.92rem;color:var(--muted);line-height:1.5}
+.qa{display:grid;gap:12px}
+.qa div{border-left:3px solid var(--line);padding-left:14px}
+.qa b{display:block}
 .toast{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:5px;font-size:.9rem}
 @media (prefers-reduced-motion:no-preference){ .view{animation:fade .25s ease} @keyframes fade{from{opacity:.4}to{opacity:1}} }
 </style>
@@ -237,6 +248,7 @@ footer{border-top:1px solid var(--line);padding-block:20px;color:var(--muted);fo
 <nav class="tabs" aria-label="Seções">
   <div class="wrap" role="tablist">
     <button role="tab" data-v="inicio" id="t-inicio">Início</button>
+    <button role="tab" data-v="ajuda" id="t-ajuda">Como usar</button>
     <button role="tab" data-v="roteiro" id="t-roteiro">Roteiro diário</button>
     <button role="tab" data-v="oracoes" id="t-oracoes">Orações</button>
     <button role="tab" data-v="consagracao" id="t-consagracao">Dia da consagração</button>
@@ -251,6 +263,8 @@ footer{border-top:1px solid var(--line);padding-block:20px;color:var(--muted);fo
 <!-- INÍCIO -->
 <section class="view" id="v-inicio">
   <blockquote class="lede-q">“Meu querido irmão, convence-te de que, se fores fiel às práticas interiores e exteriores desta Devoção, participarás dos frutos maravilhosos que ela produz na alma fiel.”<cite>São Luís Maria Grignion de Montfort</cite></blockquote>
+
+  <div class="note" style="background:var(--lapis-soft);max-width:820px"><b>PRIMEIRA VEZ AQUI?</b> Veja em <a href="#ajuda" data-go="ajuda">Como usar</a> o passo a passo do site<span data-only="web">, como gravar suas meditações e como usar no celular e no computador</span>.</div>
 
   <div style="display:grid;gap:14px">
     <h2 style="font-size:1.9rem">Como é a preparação</h2>
@@ -298,6 +312,87 @@ footer{border-top:1px solid var(--line);padding-block:20px;color:var(--muted);fo
       <div class="note" style="background:var(--lapis-soft)"><b>DEPOIS DA CONSAGRAÇÃO.</b> São Luís pede que se renove a consagração pelo menos uma vez por ano, na mesma data, repetindo as três semanas. E pode-se renová-la todos os dias: “Eu sou todo Vosso e tudo o que tenho Vos pertence, ó meu amável Jesus, por Maria, Vossa Santa Mãe!”</div>
     </div>
   </div>
+</section>
+
+<!-- COMO USAR -->
+<section class="view" id="v-ajuda" hidden>
+ <div class="help">
+  <div style="display:grid;gap:8px">
+    <div class="label">Guia do site</div>
+    <h2 style="font-size:2rem">Como usar o site</h2>
+    <p class="lede" style="margin:0">Este site acompanha você nos dias de preparação para a Consagração Total a Jesus pelas mãos de Maria, segundo São Luís Maria Grignion de Montfort. Aqui estão o roteiro de cada dia, as orações, os vídeos, as dúvidas mais comuns e um diário para você guardar o que Deus for falando ao seu coração.</p>
+  </div>
+
+  <div>
+    <h3>Para começar, em 3 passos</h3>
+    <ol class="steps">
+      <li><p><b>Escolha a data da sua consagração.</b> Na aba <a href="#inicio" data-go="inicio">Início</a>, selecione uma festa de Nossa Senhora (ou outra data). O site calcula sozinho o dia de começar, e a partir daí o topo da página mostra em que dia da preparação você está.</p></li>
+      <li data-only="web"><p><b>Entre com a sua conta Google.</b> Na aba <a href="#diario" data-go="diario">Meu diário</a> ou no fim de qualquer dia do roteiro, toque em “Entrar com Google”. É isso que guarda suas meditações na sua conta e permite enviar dúvidas.</p></li>
+      <li><p><b>Abra o dia de hoje.</b> Toque em “Abrir o dia de hoje”, no topo, ou vá na aba <a href="#roteiro" data-go="roteiro">Roteiro diário</a>.</p></li>
+    </ol>
+  </div>
+
+  <div>
+    <h3>Como é cada dia do roteiro</h3>
+    <p>São 31 dias: 12 dias para se desapegar do espírito do mundo, uma semana para o conhecimento de si mesmo, uma para o conhecimento de Nossa Senhora, uma para o conhecimento de Jesus, e o dia da consagração. Cada dia tem cinco partes:</p>
+    <ol class="steps">
+      <li><p><b>Orações do período.</b> Toque no nome de cada oração para abri-la ali mesmo.</p></li>
+      <li><p><b>Meditação da apostila.</b> Um texto de um santo para o dia.</p></li>
+      <li><p><b>No livro.</b> O tema da meditação do livro <i>Exercícios Espirituais</i> e a leitura bíblica do dia. A leitura é um link que abre o livro e o capítulo na Bíblia do Pe. Paulo Ricardo. A meditação completa deve ser lida no próprio livro.</p></li>
+      <li><p><b>Para rezar e partilhar.</b> Uma pergunta para refletir e quatro caixinhas para marcar o que você já fez. Quando as quatro estão marcadas, o dia aparece como concluído.</p></li>
+      <li><p><b>Minhas percepções.</b> Um espaço para escrever o que tocou você naquele dia. Grava sozinho enquanto você escreve.</p></li>
+    </ol>
+  </div>
+
+  <div data-only="web">
+    <h3>Suas meditações gravadas, no celular e no computador</h3>
+    <p>Quando você entra com a sua conta Google, tudo o que escreve nas percepções e todos os dias que marca ficam guardados na sua conta. Assim você pode começar no celular e continuar no computador, ou o contrário: basta entrar com a mesma conta Google nos dois.</p>
+    <p>Na aba <a href="#diario" data-go="diario">Meu diário</a> você relê todas as suas percepções em ordem, dia após dia. Vale reler antes do dia da consagração e a cada renovação anual. O botão “Copiar tudo” copia o diário inteiro para você guardar onde quiser.</p>
+    <div class="note"><b>PRIVACIDADE.</b> O seu diário é só seu. Ninguém do grupo, nem quem administra o site, consegue ler o que você escreveu.</div>
+    <p style="margin-top:12px">Se você preferir não entrar com o Google, o site funciona normalmente, mas o diário fica salvo só naquele aparelho e naquele navegador. Se trocar de celular ou limpar os dados do navegador, ele se perde.</p>
+  </div>
+
+  <div>
+    <h3>Dúvidas</h3>
+    <p>A aba <a href="#duvidas" data-go="duvidas">Dúvidas</a> reúne as perguntas mais comuns sobre a consagração, com respostas baseadas no <i>Tratado da Verdadeira Devoção</i>, na apostila e no livro. Use a busca para encontrar um assunto, por exemplo “confissão”, “correntinha” ou “perdi um dia”.</p>
+    <p data-only="web">Não encontrou a sua? Entre com Google e envie a sua pergunta. Ela aparece para todo o grupo, com o seu primeiro nome, na lista “aguardando resposta”, e quem coordena o grupo responde ali mesmo. Você pode apagar a sua própria pergunta quando quiser.</p>
+  </div>
+
+  <div>
+    <h3>O que tem em cada aba</h3>
+    <div class="tabsgrid">
+      <button data-go="inicio"><b>Início</b><span>Como é a preparação e a escolha da data da consagração.</span></button>
+      <button data-go="roteiro"><b>Roteiro diário</b><span>Os 31 dias, com orações, meditações, leitura bíblica e seu progresso.</span></button>
+      <button data-go="oracoes"><b>Orações</b><span>Veni Creator, Ave Maris Stella, as ladainhas, o Rosário e outras.</span></button>
+      <button data-go="consagracao"><b>Dia da consagração</b><span>O que fazer no dia, como comungar com Maria e a fórmula com o seu nome.</span></button>
+      <button data-go="videos"><b>Vídeos</b><span>As pregações da consagração do Instituto Hesed.</span></button>
+      <button data-go="duvidas"><b>Dúvidas</b><span>Perguntas e respostas sobre a consagração.</span></button>
+      <button data-go="diario"><b>Meu diário</b><span>Todas as suas percepções reunidas para reler.</span></button>
+    </div>
+  </div>
+
+  <div data-only="web">
+    <h3>Deixe o site na tela do celular, como um aplicativo</h3>
+    <ol class="steps">
+      <li><p><b>Android (Chrome):</b> abra o site, toque nos três pontinhos no canto de cima e depois em “Adicionar à tela inicial”.</p></li>
+      <li><p><b>iPhone (Safari):</b> abra o site, toque no botão Compartilhar (o quadrado com a seta) e depois em “Adicionar à Tela de Início”.</p></li>
+    </ol>
+    <p style="margin-top:10px">Pronto: o ícone fica junto dos seus aplicativos e abre direto no site.</p>
+  </div>
+
+  <div>
+    <h3>Problemas comuns</h3>
+    <div class="qa">
+      <div data-only="web"><b>O botão “Entrar com Google” não funciona no celular.</b>Se você abriu o link pelo WhatsApp, Instagram ou Facebook, o site está num navegador interno que às vezes bloqueia o login. Abra o link no Chrome ou no Safari.</div>
+      <div data-only="web"><b>Não vejo no computador o que escrevi no celular.</b>Confira se entrou com a mesma conta Google nos dois aparelhos. O nome da conta aparece embaixo das percepções e na aba Meu diário.</div>
+      <div><b>O topo não mostra o dia de hoje.</b>Escolha a data da sua consagração na aba Início. O site guarda essa escolha neste aparelho.</div>
+      <div><b>Perdi um ou mais dias.</b>Não precisa recomeçar. Veja a resposta completa na aba Dúvidas.</div>
+      <div><b>O site parece desatualizado.</b>Recarregue a página. No computador, use Ctrl + Shift + R.</div>
+    </div>
+  </div>
+
+  <div class="note" style="background:var(--lapis-soft)"><b>COMPARTILHE.</b> O site é gratuito e sem anúncios. Para convidar alguém, basta mandar o endereço desta página. Cada pessoa tem o próprio roteiro, o próprio progresso e o próprio diário.</div>
+ </div>
 </section>
 
 <!-- ROTEIRO -->
@@ -1152,6 +1247,7 @@ function renderVideos(){
   });
 }
 renderVideos();
+document.querySelectorAll('[data-only="web"]').forEach(el => { if (!window.CAN_EMBED) el.hidden = true; });
 
 /* ---------- navegação ---------- */
 let view = "inicio";
@@ -1197,7 +1293,7 @@ renderToday(); renderInicio(); renderPrayers(); renderFormula(); $("#consName").
   const m = h.match(/^dia(\d{1,2})$/);
   const n = currentDay();
   if (m && +m[1]>=1 && +m[1]<=31){ cur = +m[1]; show("roteiro",{day:cur, keepScroll:true}); }
-  else if (["inicio","roteiro","oracoes","consagracao","videos","duvidas","diario"].includes(h)){ if (n>=1 && n<=31) cur = n; show(h,{keepScroll:true}); }
+  else if (["inicio","ajuda","roteiro","oracoes","consagracao","videos","duvidas","diario"].includes(h)){ if (n>=1 && n<=31) cur = n; show(h,{keepScroll:true}); }
   else { if (n>=1 && n<=31) cur = n; show("inicio",{keepScroll:true}); }
 })();
 </script>
