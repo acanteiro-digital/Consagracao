@@ -891,7 +891,19 @@ const timers = {}, chain = {};
 function setSaveSt(t){ const el = document.getElementById("saveSt"); if (el) el.textContent = t; }
 function renderStoreInfo(){
   const msg = remote ? "Gravado na sua conta: só você vê, em qualquer aparelho." : "Gravado neste navegador.";
-  document.querySelectorAll(".storeInfo").forEach(el => el.textContent = msg);
+  const extra = typeof window.accountUI === "function" ? " " + window.accountUI() : "";
+  document.querySelectorAll(".storeInfo").forEach(el => el.innerHTML = esc(msg) + extra);
+}
+let firstSync = true;
+function handleSnap(snap){
+  const seen = new Set();
+  snap.docs.forEach(doc => { const v = doc.data(); const d = +(v && v.dia); if (d>=1 && d<=31){ seen.add(d); applyRemote(d, v); } });
+  if (firstSync){
+    firstSync = false;
+    const keys = new Set([...Object.keys(state.notes), ...Object.keys(state.done)].map(Number));
+    keys.forEach(d => { if (d>=1 && d<=31 && !seen.has(d) && ((state.notes[d]||"").trim() || (state.done[d]||[]).some(Boolean))) persist(d); });
+  }
+  save(); renderDayList(); if (view==="diario") renderJournal();
 }
 function persist(d){
   save();
@@ -900,7 +912,7 @@ function persist(d){
   const ref = remote.doc("d"+String(d).padStart(2,"0"));
   chain[d] = (chain[d]||Promise.resolve()).then(() => ref.set(body)).then(
     () => setSaveSt("Salvo"),
-    err => { if (err && (err.code==="invalid_argument" || err.code==="revoked" || err.code==="not_granted")){ remote = null; renderStoreInfo(); } setSaveSt("Salvo neste navegador"); });
+    err => { if (err && (err.code==="invalid_argument" || err.code==="revoked" || err.code==="not_granted" || err.code==="permission-denied")){ remote = null; renderStoreInfo(); } setSaveSt("Salvo neste navegador"); });
 }
 function applyRemote(d, v){
   if (typeof v.texto === "string"){
@@ -924,17 +936,8 @@ function applyRemote(d, v){
     if (await user.can("data.write") === false) return;
     remote = db.collection("data/users/" + uid);
     renderStoreInfo();
-    let first = true;
-    remote.onSnapshot(snap => {
-      const seen = new Set();
-      snap.docs.forEach(doc => { const v = doc.data(); const d = +(v && v.dia); if (d>=1 && d<=31){ seen.add(d); applyRemote(d, v); } });
-      if (first){
-        first = false;
-        const keys = new Set([...Object.keys(state.notes), ...Object.keys(state.done)].map(Number));
-        keys.forEach(d => { if (d>=1 && d<=31 && !seen.has(d) && ((state.notes[d]||"").trim() || (state.done[d]||[]).some(Boolean))) persist(d); });
-      }
-      save(); renderDayList(); if (view==="diario") renderJournal();
-    }, () => { remote = null; renderStoreInfo(); });
+    firstSync = true;
+    remote.onSnapshot(handleSnap, () => { remote = null; renderStoreInfo(); });
   } catch(e){}
 })();
 
@@ -1013,6 +1016,49 @@ renderToday(); renderInicio(); renderPrayers(); renderFormula(); $("#consName").
   if (m && +m[1]>=1 && +m[1]<=31){ cur = +m[1]; show("roteiro",{day:cur, keepScroll:true}); }
   else if (["inicio","roteiro","oracoes","consagracao","diario"].includes(h)){ if (n>=1 && n<=31) cur = n; show(h,{keepScroll:true}); }
   else { if (n>=1 && n<=31) cur = n; show("inicio",{keepScroll:true}); }
+})();
+</script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+/* Sincronização do diário entre aparelhos (login com Google + Firestore). */
+const FIREBASE_CONFIG = null;
+(function(){
+  if (!FIREBASE_CONFIG || !window.firebase) return;
+  firebase.initializeApp(FIREBASE_CONFIG);
+  const auth = firebase.auth(), fs = firebase.firestore();
+  let unsub = null, busy = false;
+  window.accountUI = () => {
+    const u = auth.currentUser;
+    if (u) return `<br>Conectado como <b>${esc(u.displayName || u.email || "você")}</b> · <a href="#" data-acct="out">Sair</a>`;
+    return `<br><button class="btn primary" data-acct="in" style="margin-top:6px">${busy ? "Entrando…" : "Entrar com Google para ver o diário em todos os aparelhos"}</button>`;
+  };
+  auth.getRedirectResult().catch(()=>{});
+  auth.onAuthStateChanged(u => {
+    if (unsub){ unsub(); unsub = null; }
+    if (u){
+      remote = fs.collection("users").doc(u.uid).collection("dias");
+      firstSync = true;
+      unsub = remote.onSnapshot(handleSnap, () => { remote = null; renderStoreInfo(); toast("Não foi possível sincronizar agora"); });
+    } else remote = null;
+    busy = false; renderStoreInfo();
+  });
+  document.addEventListener("click", async e => {
+    const a = e.target.closest("[data-acct]"); if (!a) return;
+    e.preventDefault();
+    if (a.dataset.acct === "out"){ await auth.signOut(); toast("Você saiu. O diário continua salvo na sua conta."); return; }
+    busy = true; renderStoreInfo();
+    const provider = new firebase.auth.GoogleAuthProvider();
+    try { await auth.signInWithPopup(provider); }
+    catch(err){
+      if (err && (err.code === "auth/popup-blocked" || err.code === "auth/operation-not-supported-in-this-environment")) { auth.signInWithRedirect(provider); return; }
+      busy = false; renderStoreInfo();
+      if (err && err.code !== "auth/popup-closed-by-user" && err.code !== "auth/cancelled-popup-request") toast("Não foi possível entrar: " + (err.code || "erro"));
+    }
+  });
+  renderStoreInfo();
 })();
 </script>
 
